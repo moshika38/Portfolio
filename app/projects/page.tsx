@@ -10,9 +10,29 @@ import Image from "next/image";
 import ProjectCard from "@/components/projectCard";
 import { motion, Variants } from "framer-motion";
 
+import ProjectModal from "@/components/ProjectModal";
+
+interface Project {
+  id: number;
+  title: string;
+  image: string;
+  description: string;
+  link: string;
+  tags: string;
+  type: string;
+}
+
 function Projects() {
   const [projectType, setProjectType] = useState("all");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const project = projects;
+
+  const handleOpenModal = (proj: Project) => {
+    setSelectedProject(proj);
+    setIsModalOpen(true);
+  };
 
   const containerVariants: Variants = {
     hidden: { opacity: 0, y: 40 },
@@ -105,6 +125,7 @@ function Projects() {
                     description={item.description}
                     tags={item.tags}
                     link={item.link}
+                    onView={() => handleOpenModal(item)}
                   />
                 </motion.div>
               ))}
@@ -114,6 +135,12 @@ function Projects() {
       </main>
 
       <Footer />
+
+      <ProjectModal
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }

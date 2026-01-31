@@ -3,10 +3,10 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Headline from "@/components/headline";
-import { downloadIcon } from "@/utils/icon";
 import Link from "next/link";
 import React from "react";
 import { motion, Variants } from "framer-motion";
+import { downloadIcon } from "@/lib/utils";
 
 function Resume() {
   const icon = downloadIcon;

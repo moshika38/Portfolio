@@ -47,4 +47,52 @@ export const projects = [
     type: "mobile",
   },
   
+  {
+    id: 6,
+    title: "Work Manager Application",
+    image: "/assets/projects/work.png",
+    description: "A Flutter-based task management app that helps users organize and schedule tasks with an intuitive interface. It includes attractive animated activities and provides scheduled notifications.",
+    link: "https://github.com/moshika38/Work-Manager-App",
+    tags: "#android #ios #Scheduling #CloudFirestore #AlertNotifications",
+    type: "mobile",
+  },
+  
+  {
+    id: 7,
+    title: "Ai Chat App With Flutter",
+    image: "/assets/projects/chatapp.png",
+    description: "An advanced AI-powered chat application built with Flutter. This app enables users to interact with AI for personalized conversations, providing an engaging and intelligent chat experience.",
+    link: "https://github.com/moshika38/Ai-Chat-App-with-Flutter",
+    tags: "#android #ios #Authentication #Ai #Chat #Gemini",
+    type: "mobile",
+  },
+  
+  {
+    id: 8,
+    title: "Document Scanner App",
+    image: "/assets/projects/doc.png",
+    description: "A Flutter-based application designed for efficient document scanning and management. The app includes both free and premium features, with a seamless payment gateway integration for upgrading to the premium version. The premium version offers additional capabilities tailored for professional use.",
+    link: "https://github.com/moshika38/Scanner-App",
+    tags: "#android #ios #Stripe #API #Payment #Gateway",
+    type: "mobile",
+  },
+  {
+    id: 9,
+    title: "Farm Management App UI/UX",
+    image: "/assets/projects/farm.jpg",
+    description: "A modern farm management mobile app UI/UX designed in Flutter, focusing on clean layouts, smooth user flow, and ease of use. Includes authentication screens, dashboard, tasks, chat, and weather overview. Backend integration not included — UI/UX only.",
+    link: "https://github.com/moshika38/Farm-App-UI",
+    tags: "#android #ios #Flutter #UI/UX",
+    type: "mobile",
+  },
+  {
+    id: 10,
+    title: "Drone Controller App",
+    image: "/assets/projects/drone.png",
+    description: "Developed a full-stack mobile app to control drones via Arduino with Bluetooth communication. Designed the UI using Flutter, integrated flight control, real-time telemetry, and camera management.",
+    link: "https://github.com/moshika38/drone-controller-app",
+    tags: "#android #ios #Arduino #Bluetooth #Flutter",
+    type: "mobile",
+  },
+  
 ];
