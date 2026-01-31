@@ -104,7 +104,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                   rel="noopener noreferrer"
                   className="flex-1 bg-primary text-black px-6 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white transition-all flex items-center justify-center gap-2 group shadow-lg shadow-primary/20"
                 >
-                  View Live Project
+                  View Project
                   <ExternalLink
                     size={18}
                     className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
