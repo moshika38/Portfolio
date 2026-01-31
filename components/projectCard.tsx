@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Eye } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 interface Props {
   image: string;
@@ -26,13 +26,6 @@ function ProjectCard({ image, title, description, tags, link, onView }: Props) {
           height={400}
           className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
         />
-
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-          <div className="bg-primary text-black p-3 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
-            <Eye size={24} />
-          </div>
-        </div>
       </div>
 
       <div className="grow flex flex-col">
@@ -54,7 +47,7 @@ function ProjectCard({ image, title, description, tags, link, onView }: Props) {
               target="_blank"
               className="flex items-center justify-center p-2.5 bg-white/5 border border-white/5 rounded-2xl hover:bg-white/10 transition-all text-white/60 hover:text-white"
             >
-              <span className="text-[14px]">&#8599;</span>
+              <ExternalLink size={16} />
             </Link>
           </div>
 

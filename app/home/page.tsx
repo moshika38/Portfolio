@@ -63,7 +63,7 @@ function HomePage() {
               Full-Stack Developer
             </p>
             <p className="inline-block text-[9px] lg:text-[10px] font-black uppercase text-center bg-white/5 border border-white/10 px-3 lg:px-4 py-2 rounded-full tracking-widest text-text-muted">
-              Enthusiast
+              AI Enthusiast
             </p>
           </div>
 
