@@ -8,6 +8,7 @@ import SocialIcon from "@/components/socialIcon";
 import AppTags from "@/components/tags";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
+import Sidebar from "../../components/sidebar";
 
 function HomePage() {
   const containerVariants: Variants = {
@@ -33,144 +34,24 @@ function HomePage() {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="flex flex-col lg:flex-row bg-card-dark withBorder rounded-4xl lg:rounded-[2.5rem] overflow-hidden relative shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border-white/5"
+      className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start relative pb-20"
     >
       {/* Static Ambient Glows */}
-      <div className="absolute -top-40 -right-40 w-[300px] lg:w-[500px] h-[300px] lg:h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0" />
-      <div className="absolute -bottom-40 -left-40 w-[300px] lg:w-[500px] h-[300px] lg:h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0" />
+      <div className="fixed -top-40 -right-40 w-[300px] lg:w-[500px] h-[300px] lg:h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0" />
+      <div className="fixed -bottom-40 -left-40 w-[300px] lg:w-[500px] h-[300px] lg:h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0" />
 
-      {/* Left Column: Profile & Info */}
-      <div className="lg:w-[35%] p-8 sm:p-14 border-b lg:border-b-0 lg:border-r border-border-dark flex flex-col items-center bg-white/1 relative z-10">
-        <motion.div
+      {/* Profile Sidebar */}
+      <Sidebar />
+
+      {/* Right Content Area */}
+      <div className="flex-1 w-full flex flex-col gap-6 lg:gap-8">
+        {/* About Section */}
+        <motion.section
           variants={itemVariants}
-          className="content flex flex-col items-center w-full"
+          className="bg-card-dark withBorder rounded-4xl lg:rounded-[2.5rem] p-8 sm:p-14 lg:p-16 relative overflow-hidden shadow-2xl"
         >
-          <div className="relative w-32 h-32 lg:w-44 lg:h-44 rounded-full overflow-hidden mb-6 lg:mb-8 ring-4 ring-primary/10 transition-transform hover:scale-105 duration-500">
-            <Image
-              src="/assets/png/1pp.png"
-              alt="profile"
-              fill
-              className="object-cover object-top"
-            />
-          </div>
-
-          <h1 className="text-2xl lg:text-3xl font-black text-white text-center tracking-tight">
-            SA Pamoth Moshika
-          </h1>
-
-          <div className="flex justify-center flex-wrap gap-2 lg:gap-3 mt-4 lg:mt-5">
-            <p className="inline-block text-[9px] lg:text-[10px] font-black uppercase text-center bg-white/5 border border-white/10 px-3 lg:px-4 py-2 rounded-full tracking-widest text-primary">
-              Full-Stack Developer
-            </p>
-            <p className="inline-block text-[9px] lg:text-[10px] font-black uppercase text-center bg-white/5 border border-white/10 px-3 lg:px-4 py-2 rounded-full tracking-widest text-text-muted">
-              AI Enthusiast
-            </p>
-          </div>
-
-          <div className="w-20 lg:w-24 h-px mt-8 lg:mt-10 bg-linear-to-r from-transparent via-border-dark to-transparent"></div>
-
-          <div className="contactinfo mt-8 lg:mt-10 w-full space-y-1 lg:space-y-2">
-            {[
-              {
-                icon: "/assets/svg/email.svg",
-                title: "Email",
-                info: "moshika38@gmail.com",
-              },
-              {
-                icon: "/assets/svg/call2.svg",
-                title: "Mobile",
-                info: "+94 71 214 3954",
-              },
-              {
-                icon: "/assets/svg/calender.svg",
-                title: "Birthday",
-                info: "Aug 2, 2003",
-              },
-              {
-                icon: "/assets/svg/location.svg",
-                title: "Location",
-                info: "Badulla, Sri Lanka",
-              },
-            ].map((item, idx) => (
-              <motion.div
-                key={idx}
-                variants={itemVariants}
-                whileHover={{ x: 5 }}
-                className="w-full"
-              >
-                <InfoCard
-                  icon={item.icon}
-                  title={item.title}
-                  description={item.info}
-                />
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            variants={itemVariants}
-            className="mt-12 lg:mt-20 pt-8 lg:pt-12 border-t border-border-dark w-full"
-          >
-            <p className="text-white/30 text-[10px] font-black uppercase tracking-[0.3em] mb-6 lg:mb-8 text-center lg:text-left">
-              Global presence
-            </p>
-            <div className="flex gap-3 lg:gap-4 justify-center lg:justify-start">
-              {[
-                {
-                  name: "github",
-                  href: "https://github.com/moshika38",
-                  icon: "git",
-                },
-                {
-                  name: "fb",
-                  href: "https://www.facebook.com/profile.php?id=61550915073941",
-                  icon: "fb",
-                },
-                {
-                  name: "whatsapp",
-                  href: "https://wa.me/+94712143954",
-                  icon: "wp",
-                },
-                {
-                  name: "email",
-                  href: "mailto:moshika38@gmail.com",
-                  icon: "email",
-                },
-              ].map((social) => (
-                <motion.a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{
-                    scale: 1.1,
-                    y: -5,
-                    backgroundColor: "var(--primary)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-white/5 flex items-center justify-center border border-white/5 transition-all group/icon"
-                >
-                  <img
-                    src={`/assets/social/${social.icon}.svg`}
-                    alt={social.name}
-                    className="w-5 h-5 opacity-40 group-hover/icon:opacity-100 group-hover/icon:invert transition-all"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src =
-                        "https://www.svgrepo.com/show/353844/github-icon.svg";
-                    }}
-                  />
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Right Column: About & Services */}
-      <div className="lg:w-[65%] p-8 sm:p-14 lg:p-16 bg-linear-to-br from-black/20 to-transparent relative z-10">
-        <motion.div variants={itemVariants} className="mb-10 lg:mb-14">
-          <Headline title="Hey there!" />
-          <p className="text-lg lg:text-xl mt-6 lg:mt-8 font-light text-text-muted leading-relaxed">
+          <Headline title="About Me" />
+          <p className="text-base lg:text-lg mt-8 font-light text-text-muted leading-relaxed">
             I’m a passionate and detail-driven{" "}
             <span className="text-primary font-medium">
               Mobile & Web Developer
@@ -180,16 +61,20 @@ function HomePage() {
             development, with strong problem-solving abilities, clean code
             practices, and a solid understanding of UI/UX.
           </p>
-        </motion.div>
+        </motion.section>
 
-        <motion.div variants={itemVariants}>
-          <Headline title="My Services" />
+        {/* Services Section */}
+        <motion.section
+          variants={itemVariants}
+          className="bg-card-dark withBorder rounded-4xl lg:rounded-[2.5rem] p-8 sm:p-14 lg:p-16 relative overflow-hidden shadow-2xl"
+        >
+          <Headline title="What I'm Doing" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 lg:mt-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
             {/* Web Dev Card */}
             <motion.div
               whileHover={{ y: -5 }}
-              className="p-6 lg:p-8 withBorder rounded-4xl bg-white/2 flex flex-col justify-between"
+              className="p-6 lg:p-8 withBorder rounded-3xl bg-white/2 flex flex-col justify-between"
             >
               <div>
                 <div className="bg-primary/10 border border-primary/20 rounded-2xl inline-block p-3 lg:p-4 mb-5 lg:mb-6">
@@ -219,7 +104,7 @@ function HomePage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <motion.div
                   whileHover={{ y: -5 }}
-                  className="p-5 lg:p-6 withBorder rounded-4xl bg-white/2"
+                  className="p-5 lg:p-6 withBorder rounded-3xl bg-white/2"
                 >
                   <Image
                     src="/assets/svg/mobile.svg"
@@ -236,7 +121,7 @@ function HomePage() {
                 </motion.div>
                 <motion.div
                   whileHover={{ y: -5 }}
-                  className="p-5 lg:p-6 withBorder rounded-4xl bg-white/2"
+                  className="p-5 lg:p-6 withBorder rounded-3xl bg-white/2"
                 >
                   <Image
                     src="/assets/svg/gd.svg"
@@ -255,7 +140,7 @@ function HomePage() {
 
               <motion.div
                 whileHover={{ y: -5 }}
-                className="bg-primary p-8 lg:p-10 rounded-4xl lg:rounded-[2.5rem] flex flex-col justify-center items-start group cursor-pointer overflow-hidden relative"
+                className="bg-primary p-8 lg:p-10 rounded-3xl lg:rounded-[2rem] flex flex-col justify-center items-start group cursor-pointer overflow-hidden relative"
               >
                 <div className="relative z-10 w-full">
                   <h3 className="text-xl lg:text-2xl font-black text-black leading-tight mb-6 lg:mb-8">
@@ -272,9 +157,9 @@ function HomePage() {
               </motion.div>
             </div>
           </div>
-        </motion.div>
+        </motion.section>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
