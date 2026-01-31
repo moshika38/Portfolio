@@ -7,9 +7,57 @@ import Headline from "@/components/headline";
 import SocialIcon from "@/components/socialIcon";
 import AppTags from "@/components/tags";
 import Link from "next/link";
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, AnimatePresence } from "framer-motion";
 
 function HomePage() {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const contactInfo = [
+    {
+      icon: "/assets/svg/email.svg",
+      title: "Email",
+      info: "moshika38@gmail.com",
+    },
+    {
+      icon: "/assets/svg/call2.svg",
+      title: "Mobile",
+      info: "+94 71 214 3954",
+    },
+    {
+      icon: "/assets/svg/calender.svg",
+      title: "Birthday",
+      info: "Aug 2, 2003",
+    },
+    {
+      icon: "/assets/svg/location.svg",
+      title: "Location",
+      info: "Badulla, Sri Lanka",
+    },
+  ];
+
+  const socialLinks = [
+    {
+      name: "github",
+      href: "https://github.com/moshika38",
+      icon: "git",
+    },
+    {
+      name: "fb",
+      href: "https://www.facebook.com/profile.php?id=61550915073941",
+      icon: "fb",
+    },
+    {
+      name: "whatsapp",
+      href: "https://wa.me/+94712143954",
+      icon: "wp",
+    },
+    {
+      name: "email",
+      href: "mailto:moshika38@gmail.com",
+      icon: "email",
+    },
+  ];
+
   const containerVariants: Variants = {
     hidden: { opacity: 0, y: 40 },
     visible: {
@@ -41,6 +89,38 @@ function HomePage() {
 
       {/* Left Column: Profile & Info */}
       <div className="lg:w-[35%] p-8 sm:p-14 border-b lg:border-b-0 lg:border-r border-border-dark flex flex-col items-center bg-white/1 relative z-10">
+        {/* Mobile Only: Top-Right Contact Toggle */}
+        <motion.button
+          onClick={() => setIsOpen(!isOpen)}
+          className={`absolute lg:hidden top-6 right-6 flex items-center gap-2 px-3 lg:px-4 py-2 rounded-full border transition-all z-30 group shadow-lg ${
+            isOpen
+              ? "bg-primary/10 border-primary/30"
+              : "bg-white/5 border-white/10"
+          }`}
+        >
+          <span
+            className={`text-[9px] font-black uppercase tracking-widest transition-colors ${
+              isOpen ? "text-primary" : "text-white/50 group-hover:text-primary"
+            }`}
+          >
+            {isOpen ? "Close" : "Contact"}
+          </span>
+          <motion.div
+            animate={{ rotate: isOpen ? 180 : 0 }}
+            className="flex items-center justify-center translate-y-px"
+          >
+            <svg
+              width="10"
+              height="6"
+              viewBox="0 0 10 6"
+              fill="none"
+              className={`transition-colors ${isOpen ? "fill-primary" : "fill-white/30 group-hover:fill-primary"}`}
+            >
+              <path d="M5 6L0 0H10L5 6Z" fill="currentColor" />
+            </svg>
+          </motion.div>
+        </motion.button>
+
         <motion.div
           variants={itemVariants}
           className="content flex flex-col items-center w-full"
@@ -58,111 +138,143 @@ function HomePage() {
             SA Pamoth Moshika
           </h1>
 
-          <div className="flex justify-center flex-wrap gap-2 lg:gap-3 mt-4 lg:mt-5">
-            <p className="inline-block text-[9px] lg:text-[10px] font-black uppercase text-center bg-white/5 border border-white/10 px-3 lg:px-4 py-2 rounded-full tracking-widest text-primary">
+          <div className="flex justify-center items-center gap-2 lg:gap-3 mt-4 lg:mt-5">
+            <p className="inline-block text-[9px] lg:text-[10px] whitespace-nowrap font-black uppercase text-center bg-white/5 border border-white/10 px-3 lg:px-4 py-2 rounded-full tracking-widest text-primary">
               Full-Stack Developer
             </p>
-            <p className="inline-block text-[9px] lg:text-[10px] font-black uppercase text-center bg-white/5 border border-white/10 px-3 lg:px-4 py-2 rounded-full tracking-widest text-text-muted">
+            <p className="inline-block text-[9px] lg:text-[10px] whitespace-nowrap font-black uppercase text-center bg-white/5 border border-white/10 px-3 lg:px-4 py-2 rounded-full tracking-widest text-text-muted">
               AI Enthusiast
             </p>
           </div>
 
-          <div className="w-20 lg:w-24 h-px mt-8 lg:mt-10 bg-linear-to-r from-transparent via-border-dark to-transparent"></div>
+          {/* Mobile: Collapsible Contact Section */}
+          <div className="lg:hidden w-full">
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="overflow-hidden w-full"
+                >
+                  <div className="contactinfo mt-8 w-full space-y-1">
+                    {contactInfo.map((item, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ x: -20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: idx * 0.1 }}
+                        className="w-full"
+                      >
+                        <InfoCard
+                          icon={item.icon}
+                          title={item.title}
+                          description={item.info}
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
 
-          <div className="contactinfo mt-8 lg:mt-10 w-full space-y-1 lg:space-y-2">
-            {[
-              {
-                icon: "/assets/svg/email.svg",
-                title: "Email",
-                info: "moshika38@gmail.com",
-              },
-              {
-                icon: "/assets/svg/call2.svg",
-                title: "Mobile",
-                info: "+94 71 214 3954",
-              },
-              {
-                icon: "/assets/svg/calender.svg",
-                title: "Birthday",
-                info: "Aug 2, 2003",
-              },
-              {
-                icon: "/assets/svg/location.svg",
-                title: "Location",
-                info: "Badulla, Sri Lanka",
-              },
-            ].map((item, idx) => (
-              <motion.div
-                key={idx}
-                variants={itemVariants}
-                whileHover={{ x: 5 }}
-                className="w-full"
-              >
-                <InfoCard
-                  icon={item.icon}
-                  title={item.title}
-                  description={item.info}
-                />
-              </motion.div>
-            ))}
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="mt-12 pt-8 border-t border-border-dark w-full"
+                  >
+                    <p className="text-white/30 text-[10px] font-black uppercase tracking-[0.3em] mb-6 text-center">
+                      Global presence
+                    </p>
+                    <div className="flex gap-3 justify-center">
+                      {socialLinks.map((social) => (
+                        <motion.a
+                          key={social.name}
+                          href={social.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{
+                            scale: 1.1,
+                            y: -5,
+                            backgroundColor: "var(--primary)",
+                          }}
+                          whileTap={{ scale: 0.95 }}
+                          className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center border border-white/5 transition-all group/icon"
+                        >
+                          <img
+                            src={`/assets/social/${social.icon}.svg`}
+                            alt={social.name}
+                            className="w-5 h-5 opacity-40 group-hover/icon:opacity-100 group-hover/icon:invert transition-all"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src =
+                                "https://www.svgrepo.com/show/353844/github-icon.svg";
+                            }}
+                          />
+                        </motion.a>
+                      ))}
+                    </div>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
-          <motion.div
-            variants={itemVariants}
-            className="mt-12 lg:mt-20 pt-8 lg:pt-12 border-t border-border-dark w-full"
-          >
-            <p className="text-white/30 text-[10px] font-black uppercase tracking-[0.3em] mb-6 lg:mb-8 text-center lg:text-left">
-              Global presence
-            </p>
-            <div className="flex gap-3 lg:gap-4 justify-center lg:justify-start">
-              {[
-                {
-                  name: "github",
-                  href: "https://github.com/moshika38",
-                  icon: "git",
-                },
-                {
-                  name: "fb",
-                  href: "https://www.facebook.com/profile.php?id=61550915073941",
-                  icon: "fb",
-                },
-                {
-                  name: "whatsapp",
-                  href: "https://wa.me/+94712143954",
-                  icon: "wp",
-                },
-                {
-                  name: "email",
-                  href: "mailto:moshika38@gmail.com",
-                  icon: "email",
-                },
-              ].map((social) => (
-                <motion.a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{
-                    scale: 1.1,
-                    y: -5,
-                    backgroundColor: "var(--primary)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-white/5 flex items-center justify-center border border-white/5 transition-all group/icon"
+          {/* PC: Static Contact Section (Restored) */}
+          <div className="hidden lg:block w-full">
+            <div className="w-24 h-px mt-10 mx-auto bg-linear-to-r from-transparent via-border-dark to-transparent"></div>
+
+            <div className="contactinfo mt-10 w-full space-y-2">
+              {contactInfo.map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={itemVariants}
+                  whileHover={{ x: 5 }}
+                  className="w-full"
                 >
-                  <img
-                    src={`/assets/social/${social.icon}.svg`}
-                    alt={social.name}
-                    className="w-5 h-5 opacity-40 group-hover/icon:opacity-100 group-hover/icon:invert transition-all"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src =
-                        "https://www.svgrepo.com/show/353844/github-icon.svg";
-                    }}
+                  <InfoCard
+                    icon={item.icon}
+                    title={item.title}
+                    description={item.info}
                   />
-                </motion.a>
+                </motion.div>
               ))}
             </div>
-          </motion.div>
+
+            <motion.div
+              variants={itemVariants}
+              className="mt-20 pt-12 border-t border-border-dark w-full"
+            >
+              <p className="text-white/30 text-[10px] font-black uppercase tracking-[0.3em] mb-8 text-left">
+                Global presence
+              </p>
+              <div className="flex gap-4 justify-start">
+                {socialLinks.map((social) => (
+                  <motion.a
+                    key={social.name}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{
+                      scale: 1.1,
+                      y: -5,
+                      backgroundColor: "var(--primary)",
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/5 transition-all group/icon"
+                  >
+                    <img
+                      src={`/assets/social/${social.icon}.svg`}
+                      alt={social.name}
+                      className="w-5 h-5 opacity-40 group-hover/icon:opacity-100 group-hover/icon:invert transition-all"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src =
+                          "https://www.svgrepo.com/show/353844/github-icon.svg";
+                      }}
+                    />
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
 
