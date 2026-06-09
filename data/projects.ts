@@ -25,7 +25,7 @@ export const projects = [
     title: "B-Vibe Cafe (POS)",
     image: "/assets/projects/bvibe.jpg",
     description: "A fully offline point-of-sale (POS) and billing system built with Flutter for B Vibe Cafe.",
-    link: "https://www.facebook.com/bvibecafe/",
+    link: "https://github.com/moshika38/B-Vibe-Cafe",
     tags: "#pos #sqlitedb #flutter #desktop #inventory #billing",
     type: "web",
   },
