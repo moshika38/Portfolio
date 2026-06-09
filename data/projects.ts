@@ -22,6 +22,15 @@ export const projects = [
   
   {
     id: 3,
+    title: "B-Vibe Cafe (POS)",
+    image: "/assets/projects/bvibe.jpg",
+    description: "A fully offline point-of-sale (POS) and billing system built with Flutter for B Vibe Cafe.",
+    link: "https://gourmet-haven-pied.vercel.app/",
+    tags: "#pos #sqlitedb #flutter #desktop #inventory #billing",
+    type: "web",
+  },
+  {
+    id: 4,
     title: "GourmetHaven",
     image: "/assets/projects/gh.png",
     description: "A modern, responsive restaurant website built with Next.js, featuring menus, location details, payments, and authentication.",
@@ -30,7 +39,7 @@ export const projects = [
     type: "web",
   },
   {
-    id: 4,
+    id: 5,
     title: "CoffeeShop",
     image: "/assets/projects/cs.jpg",
     description: "Front-end code for the Coffee House website, designed to showcase its menu, brand, and offerings while engaging potential customers through a modern, responsive interface.",
@@ -39,7 +48,7 @@ export const projects = [
     type: "web",
   },
   {
-    id: 5,
+    id: 6,
     title: "Social Connect",
     image: "/assets/projects/sma.png",
     description: "A feature-rich social media app built with Flutter, providing users with an engaging platform to connect, share, and communicate effortlessly.",
@@ -51,17 +60,17 @@ export const projects = [
 
   
   {
-    id: 6,
+    id: 7,
     title: "Work Manager Application",
     image: "/assets/projects/work.png",
     description: "A Flutter-based task management app that helps users organize and schedule tasks with an intuitive interface. It includes attractive animated activities and provides scheduled notifications.",
     link: "https://github.com/moshika38/Work-Manager-App",
-    tags: "#android #ios #Scheduling #CloudFirestore #AlertNotifications",
+    tags: "#android #ios #Scheduling #CloudFirestone #AlertNotifications",
     type: "mobile",
   },
   
   {
-    id: 7,
+    id: 8,
     title: "Ai Chat App With Flutter",
     image: "/assets/projects/chatapp.png",
     description: "An advanced AI-powered chat application built with Flutter. This app enables users to interact with AI for personalized conversations, providing an engaging and intelligent chat experience.",
@@ -71,7 +80,7 @@ export const projects = [
   },
   
   {
-    id: 8,
+    id: 9,
     title: "Document Scanner App",
     image: "/assets/projects/doc.png",
     description: "A Flutter-based application designed for efficient document scanning and management. The app includes both free and premium features, with a seamless payment gateway integration for upgrading to the premium version. The premium version offers additional capabilities tailored for professional use.",
@@ -80,7 +89,7 @@ export const projects = [
     type: "mobile",
   },
   {
-    id: 9,
+    id: 10,
     title: "Farm Management App UI/UX",
     image: "/assets/projects/farm.jpg",
     description: "A modern farm management mobile app UI/UX designed in Flutter, focusing on clean layouts, smooth user flow, and ease of use. Includes authentication screens, dashboard, tasks, chat, and weather overview. Backend integration not included — UI/UX only.",
@@ -89,7 +98,7 @@ export const projects = [
     type: "mobile",
   },
   {
-    id: 10,
+    id: 11,
     title: "Drone Controller App",
     image: "/assets/projects/drone.png",
     description: "Developed a full-stack mobile app to control drones via Arduino with Bluetooth communication. Designed the UI using Flutter, integrated flight control, real-time telemetry, and camera management.",
@@ -99,7 +108,7 @@ export const projects = [
   },
   
    {
-    id: 11,
+    id: 12,
     title: "Coffee Shop",
     image: "/assets/projects/flc.jpg",
     description: "An e-commerce mobile app built with Flutter for a coffee shop, using Firebase for authentication and Firestore for real-time data storage.",
