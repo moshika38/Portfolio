@@ -2,13 +2,14 @@
 export const projects = [
   {
     id: 1,
-    title: "GourmetHaven",
-    image: "/assets/projects/gh.png",
-    description: "A modern, responsive restaurant website built with Next.js, featuring menus, location details, payments, and authentication.",
-    link: "https://gourmet-haven-pied.vercel.app/",
-    tags: "#firebase #stripe #next.js #mongodb #typescript",
+    title: "Subhash Engineering",
+    image: "/assets/projects/sb.jpg",
+    description: "A Sri Lankan metal fabrication company specializing in custom welding and steel structures, based in Hali-Ela.",
+    link: "https://www.subhashengineering.lk/",
+    tags: "#web #lk #next.js #supabase #⁠postgreSql",
     type: "web",
   },
+   
   {
     id: 2,
     title: "CMC UAE",
@@ -21,6 +22,15 @@ export const projects = [
   
   {
     id: 3,
+    title: "GourmetHaven",
+    image: "/assets/projects/gh.png",
+    description: "A modern, responsive restaurant website built with Next.js, featuring menus, location details, payments, and authentication.",
+    link: "https://gourmet-haven-pied.vercel.app/",
+    tags: "#firebase #stripe #next.js #mongodb #typescript",
+    type: "web",
+  },
+  {
+    id: 4,
     title: "CoffeeShop",
     image: "/assets/projects/cs.jpg",
     description: "Front-end code for the Coffee House website, designed to showcase its menu, brand, and offerings while engaging potential customers through a modern, responsive interface.",
@@ -29,7 +39,7 @@ export const projects = [
     type: "web",
   },
   {
-    id: 4,
+    id: 5,
     title: "Social Connect",
     image: "/assets/projects/sma.png",
     description: "A feature-rich social media app built with Flutter, providing users with an engaging platform to connect, share, and communicate effortlessly.",
@@ -37,15 +47,8 @@ export const projects = [
     tags: "#flutter #dart #android #ios #firebase #push-notification",
     type: "mobile",
   },
-  {
-    id: 5,
-    title: "Coffee Shop",
-    image: "/assets/projects/flc.jpg",
-    description: "An e-commerce mobile app built with Flutter for a coffee shop, using Firebase for authentication and Firestore for real-time data storage.",
-    link: "https://github.com/moshika38/E-Commers-App",
-    tags: "#flutter #dart #android #ios #firebase #firebase-auth #cart",
-    type: "mobile",
-  },
+   
+
   
   {
     id: 6,
@@ -92,6 +95,16 @@ export const projects = [
     description: "Developed a full-stack mobile app to control drones via Arduino with Bluetooth communication. Designed the UI using Flutter, integrated flight control, real-time telemetry, and camera management.",
     link: "https://github.com/moshika38/drone-controller-app",
     tags: "#android #ios #Arduino #Bluetooth #Flutter",
+    type: "mobile",
+  },
+  
+   {
+    id: 11,
+    title: "Coffee Shop",
+    image: "/assets/projects/flc.jpg",
+    description: "An e-commerce mobile app built with Flutter for a coffee shop, using Firebase for authentication and Firestore for real-time data storage.",
+    link: "https://github.com/moshika38/E-Commers-App",
+    tags: "#flutter #dart #android #ios #firebase #firebase-auth #cart",
     type: "mobile",
   },
   
