@@ -71,20 +71,34 @@ body {
   z-index: 0;
 }
 
-/* === Grid Pattern === */
+/* === Grid / Checker Pattern === */
 .grid-pattern {
   position: relative;
 }
 
-.grid-pattern::after {
+.grid-pattern::before {
   content: '';
-  position: absolute;
+  position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 219, 112, 0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 219, 112, 0.015) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 20%, transparent 70%);
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 10%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 10%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.grid-pattern::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.015) 1px, transparent 0);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, black 10%, transparent 65%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, black 10%, transparent 65%);
   pointer-events: none;
   z-index: 0;
 }
@@ -300,4 +314,22 @@ body {
     padding-top: 3rem;
     padding-bottom: 3rem;
   }
+}
+
+/* === Marquee Animation === */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee-scroll 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }

@@ -10,11 +10,15 @@ import Link from "next/link";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 
 const typewriterWords = [
-  "Mobile Developer",
   "Full-Stack Developer",
-  "Web Developer",
-  "Flutter Developer",
-  "UI/UX Enthusiast",
+  "AI Enthusiast",
+];
+
+const marqueeItems = [
+  "Flutter", "React", "Next.js", "TypeScript", "Node.js",
+  "Firebase", "Tailwind CSS", "Python", "Dart", "PostgreSQL",
+  "Git", "Docker", "Figma", "REST APIs", "GraphQL",
+  "React Native", "Laravel", "MongoDB",
 ];
 
 function TypewriterText() {
@@ -197,6 +201,21 @@ function HomePage() {
                 <p className="text-sm lg:text-base font-medium text-primary/90">
                   <TypewriterText />
                 </p>
+              </div>
+
+              {/* Auto-scrolling Marquee */}
+              <div className="mt-6 lg:mt-8 w-full overflow-hidden rounded-2xl bg-white/[0.02] border border-white/[0.04] backdrop-blur-sm py-3">
+                <div className="flex animate-marquee whitespace-nowrap">
+                  {[...marqueeItems, ...marqueeItems].map((item, i) => (
+                    <span
+                      key={i}
+                      className="mx-3 lg:mx-4 text-[10px] lg:text-[11px] font-semibold uppercase tracking-widest text-white/25 whitespace-nowrap"
+                    >
+                      {item}
+                      <span className="ml-3 lg:ml-4 text-primary/20">•</span>
+                    </span>
+                  ))}
+                </div>
               </div>
 
               {/* Tags */}
