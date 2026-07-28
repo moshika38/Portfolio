@@ -365,36 +365,51 @@ function HomePage() {
             <motion.div variants={itemVariants}>
               <Headline title="My Services" />
 
+              {/* 2-column grid: AI featured card (left) + existing cards (right) */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6 mt-8 lg:mt-10">
-                {/* Web Dev Card */}
+                {/* Left Column: AI Solutions — large featured card */}
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="p-6 lg:p-8 card-premium rounded-3xl flex flex-col justify-between group"
+                  className="relative p-6 lg:p-8 rounded-3xl flex flex-col justify-between group overflow-hidden bg-gradient-to-br from-rose-500/[0.05] via-rose-500/[0.02] to-transparent border border-rose-500/15 hover:border-rose-500/25 transition-all duration-400"
                 >
-                  <div>
-                    <div className="bg-primary/[0.06] border border-primary/10 rounded-2xl inline-flex p-3 lg:p-4 mb-5 lg:mb-6 group-hover:bg-primary/[0.1] transition-colors duration-300">
-                      <Image
-                        src="/assets/svg/website.svg"
-                        alt="web"
-                        width={28}
-                        height={28}
-                      />
+                  <div className="absolute inset-0 bg-gradient-to-br from-rose-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-rose-500/10 rounded-full blur-3xl group-hover:bg-rose-500/15 transition-colors duration-700" />
+                  <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-rose-500/5 rounded-full blur-3xl" />
+
+                  <div className="relative z-10">
+                    <div className="w-11 h-11 rounded-2xl bg-rose-500/15 border border-rose-500/20 flex items-center justify-center mb-5 lg:mb-6 group-hover:bg-rose-500/20 group-hover:scale-105 transition-all duration-300">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-rose-400"
+                      >
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                        <path d="M19 3v4" />
+                        <path d="M21 5h-4" />
+                      </svg>
                     </div>
                     <h3 className="text-lg lg:text-xl font-bold text-white mb-2 lg:mb-3">
-                      Web Development
+                      AI Solutions & Automation
                     </h3>
-                    <p className="text-xs lg:text-sm text-text-muted leading-relaxed">
-                      Building high-performance, scalable web applications using the
-                      latest tech stacks like Next.js, React, and Node.js.
+                    <p className="text-xs lg:text-sm text-text-muted leading-relaxed max-w-md">
+                      Build intelligent AI-powered applications, AI chatbots, workflow automation, AI agents, and LLM integrations using modern AI technologies and APIs.
                     </p>
                   </div>
-                  <div className="flex flex-wrap gap-2 mt-6 lg:mt-8">
-                    <AppTags tagname="TypeScript" />
-                    <AppTags tagname="Next.js" />
-                    <AppTags tagname="PostgreSQL" />
+                  <div className="flex flex-wrap gap-2 mt-6 lg:mt-8 relative z-10">
+                    <AppTags tagname="OpenAI" />
+                    <AppTags tagname="Gemini" />
+                    <AppTags tagname="Python" />
                   </div>
                 </motion.div>
 
+                {/* Right Column: App Dev + Graphic Design + CTA */}
                 <div className="flex flex-col gap-5 lg:gap-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6">
                     <motion.div
@@ -453,6 +468,35 @@ function HomePage() {
                   </motion.div>
                 </div>
               </div>
+
+              {/* Full-width Web Development card below the grid */}
+              <motion.div
+                whileHover={{ y: -4 }}
+                className="p-6 lg:p-8 card-premium rounded-3xl flex flex-col justify-between group mt-5 lg:mt-6"
+              >
+                <div>
+                  <div className="bg-primary/[0.06] border border-primary/10 rounded-2xl inline-flex p-3 lg:p-4 mb-5 lg:mb-6 group-hover:bg-primary/[0.1] transition-colors duration-300">
+                    <Image
+                      src="/assets/svg/website.svg"
+                      alt="web"
+                      width={28}
+                      height={28}
+                    />
+                  </div>
+                  <h3 className="text-lg lg:text-xl font-bold text-white mb-2 lg:mb-3">
+                    Web Development
+                  </h3>
+                  <p className="text-xs lg:text-sm text-text-muted leading-relaxed">
+                    Building high-performance, scalable web applications using the
+                    latest tech stacks like Next.js, React, and Node.js.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-6 lg:mt-8">
+                  <AppTags tagname="TypeScript" />
+                  <AppTags tagname="Next.js" />
+                  <AppTags tagname="PostgreSQL" />
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
