@@ -8,9 +8,6 @@ import React, { useState, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import {
-  Mail,
-  Phone,
-  MapPin,
   Send,
   MessageSquare,
   User,
@@ -24,7 +21,6 @@ function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  const [isHovering, setIsHovering] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -37,7 +33,6 @@ function Contact() {
     setError(null);
 
     try {
-      // Collect form data manually to ensure fields are captured correctly
       const formData = new FormData(formRef.current);
 
       const templateParams = {
@@ -58,7 +53,7 @@ function Contact() {
       setIsSent(true);
       formRef.current.reset();
       setTimeout(() => setIsSent(false), 5000);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("EmailJS Error:", err);
       setError("Failed to transmit message. Please try again.");
     } finally {
@@ -66,34 +61,31 @@ function Contact() {
     }
   };
 
-  const handleMouseEnter = () => setIsHovering(true);
-  const handleMouseLeave = () => {
-    setIsHovering(false);
-  };
+  const handleMouseEnter = () => {};
+  const handleMouseLeave = () => {};
 
   const containerVariants: Variants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.6,
         ease: [0.16, 1, 0.3, 1],
-        staggerChildren: 0.1,
+        staggerChildren: 0.08,
       },
     },
   };
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
   };
 
   return (
-    <div className="contact min-h-screen flex flex-col selection:bg-primary/30">
+    <div className="contact min-h-screen flex flex-col relative selection:bg-primary/30">
       <Header />
 
-      <main className="grow max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <main className="grow max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <motion.div
           ref={cardRef}
           onMouseEnter={handleMouseEnter}
@@ -101,19 +93,17 @@ function Contact() {
           initial="hidden"
           animate="visible"
           variants={containerVariants}
-          className="group withBorder rounded-[2.5rem] overflow-hidden relative shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border-white/5"
-          style={{ backgroundColor: 'rgba(30, 30, 31, 0.75)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}
+          className="group card-premium rounded-3xl lg:rounded-[2.5rem] overflow-hidden relative"
         >
-          {/* Static Ambient Glows */}
-          <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0" />
-          <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0" />
+          <div className="glow-top-right" />
+          <div className="glow-bottom-left" />
 
           <div className="flex flex-col lg:flex-row min-h-[700px] relative z-10">
-            {/* Left Column: Intelligence & Contact - Hidden on Mobile */}
-            <div className="hidden lg:flex lg:w-[40%] p-8 sm:p-14 lg:p-16 border-b lg:border-b-0 lg:border-r border-border-dark flex-col justify-between bg-white/1">
+            {/* Left Column: Contact Info */}
+            <div className="hidden lg:flex lg:w-[40%] p-8 sm:p-12 lg:p-16 border-b lg:border-b-0 lg:border-r border-white/[0.03] flex-col justify-between">
               <div className="space-y-10 lg:space-y-14">
                 <motion.div variants={itemVariants}>
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6 lg:mb-8">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/[0.06] border border-primary/10 mb-6 lg:mb-8">
                     <span className="relative flex h-2 w-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -122,14 +112,14 @@ function Contact() {
                       Available for projects
                     </span>
                   </div>
-                  <Headline title="Let's build something truly unique together." />
-                  <p className="text-text-muted mt-6 lg:mt-8 text-base lg:text-lg font-light leading-relaxed max-w-sm">
+                  <Headline title="Let&apos;s build something truly unique together." />
+                  <p className="text-text-muted mt-6 lg:mt-8 text-sm lg:text-base font-light leading-relaxed max-w-sm">
                     Have a concept you want to bring to life? I specialize in
                     creating premium digital experiences that stand out.
                   </p>
                 </motion.div>
 
-                <div className="space-y-4 lg:space-y-6">
+                <div className="space-y-2">
                   {[
                     {
                       icon: "/assets/svg/email.svg",
@@ -150,7 +140,7 @@ function Contact() {
                     <motion.div
                       key={idx}
                       variants={itemVariants}
-                      whileHover={{ x: 12 }}
+                      whileHover={{ x: 8 }}
                       className="cursor-pointer"
                     >
                       <InfoCard
@@ -165,12 +155,12 @@ function Contact() {
 
               <motion.div
                 variants={itemVariants}
-                className="mt-12 lg:mt-20 pt-8 lg:pt-12 border-t border-border-dark"
+                className="mt-12 lg:mt-20 pt-8 lg:pt-12 border-t border-white/[0.03]"
               >
-                <p className="text-white/30 text-[10px] font-black uppercase tracking-[0.3em] mb-6 lg:mb-8">
-                  Global presence
+                <p className="text-white/20 text-[10px] font-black uppercase tracking-[0.3em] mb-6 lg:mb-8">
+                  Connect
                 </p>
-                <div className="flex gap-4 lg:gap-5">
+                <div className="flex gap-3 lg:gap-4">
                   {[
                     {
                       name: "github",
@@ -198,18 +188,14 @@ function Contact() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{
-                        scale: 1.15,
-                        y: -8,
-                        backgroundColor: "var(--primary)",
-                      }}
+                      whileHover={{ scale: 1.1, y: -4 }}
                       whileTap={{ scale: 0.9 }}
-                      className="w-12 h-12 lg:w-14 lg:h-14 rounded-xl lg:rounded-2xl bg-border-dark/50 flex items-center justify-center border border-white/5 transition-all group/icon shadow-lg"
+                      className="w-11 h-11 lg:w-12 lg:h-12 rounded-xl bg-white/[0.03] border border-white/[0.04] flex items-center justify-center transition-all group/icon hover:border-primary/15 hover:bg-primary/[0.06]"
                     >
                       <img
                         src={`/assets/social/${social.icon}.svg`}
                         alt={social.name}
-                        className="w-5 h-5 lg:w-6 lg:h-6 opacity-40 group-hover/icon:opacity-100 group-hover/icon:invert transition-all"
+                        className="w-4 h-4 opacity-30 group-hover/icon:opacity-100 group-hover/icon:invert transition-all duration-300"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src =
                             "https://www.svgrepo.com/show/353844/github-icon.svg";
@@ -221,63 +207,63 @@ function Contact() {
               </motion.div>
             </div>
 
-            {/* Right Column: Interaction Form */}
-            <div className="lg:w-[60%] p-8 sm:p-14 lg:p-20 bg-linear-to-br from-black/40 to-transparent backdrop-blur-md">
+            {/* Right Column: Form */}
+            <div className="lg:w-[60%] p-8 sm:p-12 lg:p-16 xl:p-20 bg-gradient-to-br from-white/[0.005] to-transparent">
               <motion.div variants={itemVariants} className="mb-10 lg:mb-14">
-                <h2 className="text-3xl lg:text-5xl font-black text-white mb-4 tracking-tighter">
+                <h2 className="text-2xl lg:text-4xl font-black text-white mb-4 tracking-tight">
                   Get started.
                 </h2>
-                <p className="text-text-muted text-lg lg:text-xl font-light">
+                <p className="text-text-muted text-sm lg:text-base font-light">
                   I usually respond within a few business hours.
                 </p>
               </motion.div>
 
               <form
                 ref={formRef}
-                className="space-y-8 lg:space-y-10"
+                className="space-y-6 lg:space-y-8"
                 onSubmit={handleSendEmail}
               >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-8">
                   <motion.div
                     variants={itemVariants}
-                    className="space-y-3 lg:space-y-4"
+                    className="space-y-2.5"
                   >
-                    <label className="text-[10px] lg:text-[11px] font-black text-white/40 uppercase tracking-widest ml-1">
+                    <label className="text-[10px] lg:text-[11px] font-black text-white/30 uppercase tracking-widest ml-1">
                       Identity
                     </label>
                     <div className="relative group/input">
                       <User
-                        className="absolute left-5 top-1/2 -translate-y-1/2 text-white/10 group-focus-within/input:text-primary transition-colors duration-300"
-                        size={20}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-white/10 group-focus-within/input:text-primary transition-colors duration-300"
+                        size={18}
                       />
                       <input
                         required
                         name="from_name"
                         type="text"
-                        placeholder="What's your name?"
-                        className="w-full bg-border-dark/10 border border-white/5 rounded-2xl pl-14 pr-7 py-4 lg:py-5 text-white placeholder:text-white/10 focus:outline-none focus:border-primary/30 focus:bg-white/4 transition-all duration-300"
+                        placeholder="What&apos;s your name?"
+                        className="w-full bg-white/[0.02] border border-white/[0.04] rounded-xl pl-12 pr-5 py-4 text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-primary/20 focus:bg-primary/[0.02] transition-all duration-300"
                       />
                     </div>
                   </motion.div>
 
                   <motion.div
                     variants={itemVariants}
-                    className="space-y-3 lg:space-y-4"
+                    className="space-y-2.5"
                   >
-                    <label className="text-[10px] lg:text-[11px] font-black text-white/40 uppercase tracking-widest ml-1">
+                    <label className="text-[10px] lg:text-[11px] font-black text-white/30 uppercase tracking-widest ml-1">
                       Digital Address
                     </label>
                     <div className="relative group/input">
                       <AtSign
-                        className="absolute left-5 top-1/2 -translate-y-1/2 text-white/10 group-focus-within/input:text-primary transition-colors duration-300"
-                        size={20}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-white/10 group-focus-within/input:text-primary transition-colors duration-300"
+                        size={18}
                       />
                       <input
                         required
                         name="reply_to"
                         type="email"
                         placeholder="email@domain.com"
-                        className="w-full bg-border-dark/10 border border-white/5 rounded-2xl pl-14 pr-7 py-4 lg:py-5 text-white placeholder:text-white/10 focus:outline-none focus:border-primary/30 focus:bg-white/4 transition-all duration-300"
+                        className="w-full bg-white/[0.02] border border-white/[0.04] rounded-xl pl-12 pr-5 py-4 text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-primary/20 focus:bg-primary/[0.02] transition-all duration-300"
                       />
                     </div>
                   </motion.div>
@@ -285,49 +271,49 @@ function Contact() {
 
                 <motion.div
                   variants={itemVariants}
-                  className="space-y-3 lg:space-y-4"
+                  className="space-y-2.5"
                 >
-                  <label className="text-[10px] lg:text-[11px] font-black text-white/40 uppercase tracking-widest ml-1">
+                  <label className="text-[10px] lg:text-[11px] font-black text-white/30 uppercase tracking-widest ml-1">
                     Subject of conversation
                   </label>
                   <div className="relative group/input">
                     <Globe
-                      className="absolute left-5 top-1/2 -translate-y-1/2 text-white/10 group-focus-within/input:text-primary transition-colors duration-300"
-                      size={20}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-white/10 group-focus-within/input:text-primary transition-colors duration-300"
+                      size={18}
                     />
                     <input
                       name="subject"
                       type="text"
                       placeholder="e.g. Website Overhaul"
-                      className="w-full bg-border-dark/10 border border-white/5 rounded-2xl pl-14 pr-7 py-4 lg:py-5 text-white placeholder:text-white/10 focus:outline-none focus:border-primary/30 focus:bg-white/4 transition-all duration-300"
+                      className="w-full bg-white/[0.02] border border-white/[0.04] rounded-xl pl-12 pr-5 py-4 text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-primary/20 focus:bg-primary/[0.02] transition-all duration-300"
                     />
                   </div>
                 </motion.div>
 
                 <motion.div
                   variants={itemVariants}
-                  className="space-y-3 lg:space-y-4"
+                  className="space-y-2.5"
                 >
-                  <label className="text-[10px] lg:text-[11px] font-black text-white/40 uppercase tracking-widest ml-1">
+                  <label className="text-[10px] lg:text-[11px] font-black text-white/30 uppercase tracking-widest ml-1">
                     The Detail
                   </label>
                   <div className="relative group/input">
                     <MessageSquare
-                      className="absolute left-5 top-7 text-white/10 group-focus-within/input:text-primary transition-colors duration-300"
-                      size={20}
+                      className="absolute left-4 top-5 text-white/10 group-focus-within/input:text-primary transition-colors duration-300"
+                      size={18}
                     />
                     <textarea
                       required
                       name="message"
                       rows={5}
                       placeholder="Tell me everything about your vision..."
-                      className="w-full bg-border-dark/10 border border-white/5 rounded-2xl pl-14 pr-7 py-5 lg:py-6 text-white placeholder:text-white/10 focus:outline-none focus:border-primary/30 focus:bg-white/4 transition-all duration-300 resize-none"
+                      className="w-full bg-white/[0.02] border border-white/[0.04] rounded-xl pl-12 pr-5 py-4 text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-primary/20 focus:bg-primary/[0.02] transition-all duration-300 resize-none"
                     ></textarea>
                   </div>
                 </motion.div>
 
                 {error && (
-                  <p className="text-red-400 text-xs font-bold uppercase tracking-widest ml-1">
+                  <p className="text-red-400/80 text-xs font-bold uppercase tracking-widest ml-1">
                     {error}
                   </p>
                 )}
@@ -340,23 +326,23 @@ function Contact() {
                     y: isSending || isSent ? 0 : -2,
                   }}
                   whileTap={{ scale: isSending || isSent ? 1 : 0.99 }}
-                  className={`w-full ${isSent ? "bg-green-500 text-white" : "bg-primary text-black"} font-black text-lg lg:text-xl py-5 lg:py-6 rounded-2xl flex items-center justify-center gap-4 transition-all duration-500 shadow-[0_20px_40px_-10px_rgba(255,219,112,0.3)] relative overflow-hidden group/btn disabled:cursor-not-allowed`}
+                  className={`w-full ${isSent ? "bg-emerald-500 text-white" : "bg-primary text-black"} font-black text-base lg:text-lg py-5 rounded-xl flex items-center justify-center gap-3 transition-all duration-500 shadow-[0_20px_40px_-10px_rgba(255,219,112,0.2)] relative overflow-hidden group/btn disabled:cursor-not-allowed`}
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     {isSending ? (
                       <>
                         TRANSMITTING...{" "}
-                        <Loader2 size={24} className="animate-spin" />
+                        <Loader2 size={20} className="animate-spin" />
                       </>
                     ) : isSent ? (
                       <>
-                        MESSAGE SENT! <CheckCircle2 size={24} />
+                        MESSAGE SENT! <CheckCircle2 size={20} />
                       </>
                     ) : (
                       <>
                         TRANSMIT MESSAGE{" "}
                         <Send
-                          size={24}
+                          size={18}
                           className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform"
                         />
                       </>

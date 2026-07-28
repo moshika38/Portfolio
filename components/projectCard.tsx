@@ -14,9 +14,10 @@ interface Props {
 
 function ProjectCard({ image, title, description, tags, link, onView }: Props) {
   return (
-    <div className="bg-card-dark withBorder rounded-3xl p-5 flex flex-col h-full group relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-primary/5">
+    <div className="card-premium rounded-3xl p-4 flex flex-col h-full group relative overflow-hidden">
+      {/* Image Container */}
       <div
-        className="w-full h-[160px] overflow-hidden rounded-2xl mb-4 relative cursor-pointer"
+        className="w-full h-[180px] overflow-hidden rounded-2xl mb-5 relative cursor-pointer"
         onClick={onView}
       >
         <Image
@@ -24,12 +25,17 @@ function ProjectCard({ image, title, description, tags, link, onView }: Props) {
           alt={title}
           width={600}
           height={400}
-          className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+          className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
         />
+        {/* Overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
 
-      <div className="grow flex flex-col">
-        <h3 className="text-lg font-bold text-white mb-2">{title}</h3>
+      {/* Content */}
+      <div className="grow flex flex-col px-1">
+        <h3 className="text-base lg:text-lg font-bold text-white mb-2 group-hover:text-primary/90 transition-colors duration-300">
+          {title}
+        </h3>
         <p className="text-xs text-text-muted leading-relaxed line-clamp-2 mb-4">
           {description}
         </p>
@@ -38,21 +44,21 @@ function ProjectCard({ image, title, description, tags, link, onView }: Props) {
           <div className="flex gap-3">
             <button
               onClick={onView}
-              className="grow bg-primary/10 text-primary hover:bg-primary hover:text-black px-5 py-2.5 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all flex items-center justify-center gap-2"
+              className="grow bg-primary/[0.08] text-primary border border-primary/10 hover:bg-primary hover:text-black px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 hover:border-primary hover:shadow-lg hover:shadow-primary/10"
             >
               Learn More
             </button>
             <Link
               href={link}
               target="_blank"
-              className="flex items-center justify-center p-2.5 bg-white/5 border border-white/5 rounded-2xl hover:bg-white/10 transition-all text-white/60 hover:text-white"
+              className="flex items-center justify-center p-2.5 bg-white/[0.03] border border-white/[0.04] rounded-xl hover:bg-white/[0.06] hover:border-white/[0.08] transition-all duration-300 text-white/40 hover:text-white"
             >
-              <ExternalLink size={16} />
+              <ExternalLink size={15} />
             </Link>
           </div>
 
           <div className="tags">
-            <p className="text-[10px] font-medium text-text-muted uppercase tracking-[0.15em]">
+            <p className="text-[10px] font-medium text-white/20 uppercase tracking-[0.12em]">
               {tags}
             </p>
           </div>

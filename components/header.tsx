@@ -19,16 +19,19 @@ function Header() {
   ];
 
   return (
-    <header className="flex justify-center items-center sticky top-0 h-[80px] lg:h-[100px] z-50 w-full backdrop-blur-md">
-      <div className="w-[90%] lg:w-[77%] flex justify-between items-center">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-primary flex items-center justify-center rounded-full text-black font-bold text-1xl shadow-lg shadow-primary/20">
+    <header className="flex justify-center items-center sticky top-0 h-[80px] lg:h-[100px] z-50 w-full">
+      {/* Glass backdrop for header */}
+      <div className="absolute inset-0 bg-background/70 backdrop-blur-xl border-b border-white/[0.03]" />
+
+      <div className="w-[90%] lg:w-[77%] flex justify-between items-center relative z-10">
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 bg-primary flex items-center justify-center rounded-full text-black font-bold text-sm shadow-lg shadow-primary/20 group-hover:shadow-primary/30 transition-shadow duration-300">
             PM
           </div>
           <h1 className="text-lg lg:text-[20px] text-white font-medium hidden sm:block">
-            Pamoth Moshika | Portfolio
+            Pamoth Moshika <span className="text-text-muted font-light">| Portfolio</span>
           </h1>
-        </div>
+        </Link>
 
         {/* Mobile Page Title Indicator */}
         <div className="lg:hidden absolute left-1/2 -translate-x-1/2 pointer-events-none">
@@ -44,19 +47,20 @@ function Header() {
         </div>
 
         {/* Desktop Nav */}
-        <nav className="bg-card-dark/80 withBorder px-8 py-3 rounded-2xl hidden lg:block backdrop-blur-sm">
-          <ul className="flex items-center gap-8">
+        <nav className="bg-card-dark/80 border border-white/[0.04] px-3 py-2 rounded-2xl hidden lg:block backdrop-blur-sm">
+          <ul className="flex items-center gap-1">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`${pathname === link.href ? "text-primary" : "text-white/70"} text-[14px] font-medium transition-all hover:text-primary relative group`}
+                  className={`${pathname === link.href ? "text-primary bg-primary/[0.06]" : "text-white/50 hover:text-white/80 hover:bg-white/[0.03]"} text-[13px] font-medium transition-all duration-300 relative px-5 py-2.5 rounded-xl block`}
                 >
                   {link.name}
                   {pathname === link.href && (
                     <motion.div
                       layoutId="activeNav"
-                      className="absolute -bottom-1 left-0 right-0 h-px bg-primary"
+                      className="absolute bottom-1 left-5 right-5 h-[2px] bg-primary/60 rounded-full"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
                 </Link>
@@ -68,9 +72,11 @@ function Header() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="lg:hidden p-3 bg-card-dark withBorder rounded-xl text-white hover:text-primary transition-colors"
+          className="lg:hidden p-3 bg-card-dark border border-white/[0.04] rounded-xl text-white hover:text-primary transition-all duration-300 hover:border-primary/10"
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
         >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
@@ -78,18 +84,19 @@ function Header() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-[90px] left-1/2 -translate-x-1/2 w-[90%] bg-card-dark withBorder rounded-3xl p-6 lg:hidden z-50 shadow-2xl backdrop-blur-xl"
+            initial={{ opacity: 0, y: -12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -12, scale: 0.98 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute top-[90px] left-1/2 -translate-x-1/2 w-[90%] bg-card-dark/95 border border-white/[0.05] rounded-3xl p-4 lg:hidden z-50 shadow-2xl backdrop-blur-2xl"
           >
-            <ul className="flex flex-col gap-4">
+            <ul className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`${pathname === link.href ? "bg-primary text-black" : "text-white/70 hover:bg-white/5"} block px-6 py-4 rounded-2xl text-[16px] font-black uppercase tracking-widest transition-all`}
+                    className={`${pathname === link.href ? "bg-primary/[0.08] text-primary border-primary/10" : "text-white/60 hover:bg-white/[0.03] hover:text-white/90 border-transparent"} block px-5 py-4 rounded-2xl text-[13px] font-semibold tracking-wide transition-all duration-200 border`}
                   >
                     {link.name}
                   </Link>

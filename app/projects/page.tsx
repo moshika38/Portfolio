@@ -4,12 +4,9 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Headline from "@/components/headline";
 import { projects } from "@/data/projects";
-import Link from "next/link";
 import { useState } from "react";
-import Image from "next/image";
 import ProjectCard from "@/components/projectCard";
 import { motion, Variants } from "framer-motion";
-
 import ProjectModal from "@/components/ProjectModal";
 
 interface Project {
@@ -35,66 +32,60 @@ function Projects() {
   };
 
   const containerVariants: Variants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.6,
         ease: [0.16, 1, 0.3, 1],
-        staggerChildren: 0.1,
+        staggerChildren: 0.06,
       },
     },
   };
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
   };
 
   return (
-    <div className="projects min-h-screen flex flex-col selection:bg-primary/30">
+    <div className="projects min-h-screen flex flex-col relative selection:bg-primary/30">
       <Header />
 
-      <main className="grow max-w-[1240px] mx-auto px-2 sm:px-6 lg:px-8 w-full">
+      <main className="grow max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <motion.div
           initial="hidden"
           animate="visible"
           variants={containerVariants}
-          className="withBorder rounded-3xl lg:rounded-[2.5rem] overflow-hidden relative shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border-white/5 min-h-[700px]"
-          style={{ backgroundColor: 'rgba(30, 30, 31, 0.75)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}
+          className="card-premium rounded-3xl lg:rounded-[2.5rem] overflow-hidden relative min-h-[700px]"
         >
-          {/* Static Ambient Glows */}
-          <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0" />
-          <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0" />
+          <div className="glow-top-right" />
+          <div className="glow-bottom-left" />
 
-          <div className="p-6 sm:p-14 lg:p-16 relative z-10">
+          <div className="p-6 sm:p-12 lg:p-16 relative z-10">
             <motion.div
               variants={itemVariants}
               className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-12 lg:mb-16"
             >
               <div>
                 <Headline title="My Projects" />
-                <p className="text-text-muted mt-4 text-base lg:text-lg font-light max-w-xl">
+                <p className="text-text-muted mt-4 text-sm lg:text-base font-light max-w-xl leading-relaxed">
                   A collection of my recent work across web and mobile
                   platforms.
                 </p>
               </div>
 
-              <div className="flex bg-white/5 p-1.5 lg:p-2 rounded-2xl border border-white/5 backdrop-blur-sm w-full lg:w-auto overflow-x-auto">
+              <div className="flex bg-white/[0.03] p-1.5 rounded-xl border border-white/[0.04] backdrop-blur-sm w-full lg:w-auto overflow-x-auto">
                 <div className="flex w-full lg:w-auto min-w-max">
                   {["all", "mobile", "web"].map((type) => (
                     <button
                       key={type}
                       onClick={() => setProjectType(type)}
-                      className={`
-                        flex-1 lg:flex-none px-4 lg:px-6 py-2.5 lg:py-3 rounded-xl text-[10px] lg:text-xs font-black uppercase tracking-widest transition-all duration-300
-                        ${
-                          projectType === type
-                            ? "bg-primary text-black shadow-lg shadow-primary/20"
-                            : "text-white/40 hover:text-white hover:bg-white/5"
-                        }
-                      `}
+                      className={`flex-1 lg:flex-none px-5 lg:px-6 py-2.5 rounded-lg text-[10px] lg:text-[11px] font-black uppercase tracking-widest transition-all duration-300 ${
+                        projectType === type
+                          ? "bg-primary text-black shadow-lg shadow-primary/15"
+                          : "text-white/30 hover:text-white/60 hover:bg-white/[0.03]"
+                      }`}
                     >
                       {type === "all"
                         ? "All"
@@ -109,7 +100,7 @@ function Projects() {
 
             <motion.div
               variants={itemVariants}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6"
             >
               {(projectType === "all"
                 ? project
@@ -117,8 +108,8 @@ function Projects() {
               ).map((item) => (
                 <motion.div
                   key={item.id}
-                  whileHover={{ y: -10 }}
-                  transition={{ duration: 0.3 }}
+                  whileHover={{ y: -8 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <ProjectCard
                     image={item.image}
