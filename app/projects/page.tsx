@@ -62,7 +62,7 @@ function Projects() {
           animate="visible"
           variants={containerVariants}
           className="withBorder rounded-3xl lg:rounded-[2.5rem] overflow-hidden relative shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border-white/5 min-h-[700px]"
-          style={{ backgroundColor: 'rgba(30, 30, 31, 0.85)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}
+          style={{ backgroundColor: 'rgba(30, 30, 31, 0.75)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}
         >
           {/* Static Ambient Glows */}
           <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0" />

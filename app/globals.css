@@ -39,26 +39,26 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
+    linear-gradient(rgba(255, 219, 112, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 219, 112, 0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
   pointer-events: none;
   z-index: 0;
-  mask-image: radial-gradient(ellipse 70% 55% at 50% 50%, black 25%, transparent 72%);
-  -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 50%, black 25%, transparent 72%);
+  mask-image: radial-gradient(ellipse 75% 60% at 50% 50%, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 50%, black 30%, transparent 70%);
 }
 
-/* Subtle gold dots at grid intersections */
+/* Gold dots at grid intersections */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(255, 219, 112, 0.08) 1.5px, transparent 1.5px);
-  background-size: 48px 48px;
+  background-image: radial-gradient(circle, rgba(255, 219, 112, 0.20) 1.5px, transparent 1.5px);
+  background-size: 40px 40px;
   pointer-events: none;
   z-index: 0;
-  mask-image: radial-gradient(ellipse 70% 55% at 50% 50%, black 25%, transparent 72%);
-  -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 50%, black 25%, transparent 72%);
+  mask-image: radial-gradient(ellipse 75% 60% at 50% 50%, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 50%, black 30%, transparent 70%);
 }
 
 .page-content {
