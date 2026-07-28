@@ -23,7 +23,7 @@ function Header() {
       {/* Glass backdrop for header */}
       <div className="absolute inset-0 bg-background/70 backdrop-blur-xl border-b border-white/[0.03]" />
 
-      <div className="w-[90%] lg:w-[77%] flex justify-between items-center relative z-10">
+      <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center relative z-10">
         <Link href="/" className="flex items-center gap-3 group">
           <div className="w-10 h-10 bg-primary flex items-center justify-center rounded-full text-black font-bold text-sm shadow-lg shadow-primary/20 group-hover:shadow-primary/30 transition-shadow duration-300">
             PM
@@ -88,7 +88,7 @@ function Header() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, scale: 0.98 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-[90px] left-1/2 -translate-x-1/2 w-[90%] bg-card-dark/95 border border-white/[0.05] rounded-3xl p-4 lg:hidden z-50 shadow-2xl backdrop-blur-2xl"
+            className="absolute top-[90px] left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] max-w-[1360px] bg-card-dark/95 border border-white/[0.05] rounded-3xl p-4 lg:hidden z-50 shadow-2xl backdrop-blur-2xl"
           >
             <ul className="flex flex-col gap-1">
               {navLinks.map((link) => (
