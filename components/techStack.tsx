@@ -5,130 +5,101 @@ import { motion } from "framer-motion";
 
 interface TechItem {
   name: string;
-  icon: string;
 }
 
 interface TechCategory {
   title: string;
-  accent: string;
-  glow: string;
+  subtitle: string;
   items: TechItem[];
 }
 
 const techCategories: TechCategory[] = [
   {
     title: "Frontend",
-    accent: "primary",
-    glow: "from-primary/8 to-transparent",
+    subtitle: "Building beautiful interfaces",
     items: [
-      { name: "React", icon: "Re" },
-      { name: "Next.js", icon: "Nx" },
-      { name: "TypeScript", icon: "Ts" },
-      { name: "JavaScript", icon: "Js" },
-      { name: "Tailwind CSS", icon: "Tw" },
-      { name: "HTML5", icon: "Ht" },
-      { name: "CSS3", icon: "Cs" },
+      { name: "React" },
+      { name: "Next.js" },
+      { name: "TypeScript" },
+      { name: "JavaScript" },
+      { name: "Tailwind CSS" },
+      { name: "HTML5" },
+      { name: "CSS3" },
     ],
   },
   {
     title: "Backend",
-    accent: "emerald",
-    glow: "from-emerald-500/8 to-transparent",
+    subtitle: "Powering the logic",
     items: [
-      { name: "Node.js", icon: "No" },
-      { name: "Express", icon: "Ex" },
-      { name: "Laravel", icon: "La" },
-      { name: "Firebase", icon: "Fi" },
-      { name: "REST APIs", icon: "Ap" },
+      { name: "Node.js" },
+      { name: "Express" },
+      { name: "Laravel" },
+      { name: "Firebase" },
+      { name: "REST APIs" },
     ],
   },
   {
     title: "Mobile",
-    accent: "blue",
-    glow: "from-blue-500/8 to-transparent",
+    subtitle: "Apps that travel with you",
     items: [
-      { name: "Flutter", icon: "Fl" },
-      { name: "Dart", icon: "Da" },
-      { name: "React Native", icon: "Rn" },
-      { name: "Android", icon: "An" },
+      { name: "Flutter" },
+      { name: "Dart" },
+      { name: "React Native" },
+      { name: "Android" },
     ],
   },
   {
     title: "Database",
-    accent: "violet",
-    glow: "from-violet-500/8 to-transparent",
+    subtitle: "Storing what matters",
     items: [
-      { name: "PostgreSQL", icon: "Pg" },
-      { name: "MongoDB", icon: "Mo" },
-      { name: "MySQL", icon: "My" },
-      { name: "Firestore", icon: "Fs" },
-      { name: "Supabase", icon: "Su" },
+      { name: "PostgreSQL" },
+      { name: "MongoDB" },
+      { name: "MySQL" },
+      { name: "Firestore" },
+      { name: "Supabase" },
     ],
   },
   {
-    title: "Tools",
-    accent: "orange",
-    glow: "from-orange-500/8 to-transparent",
+    title: "Tools & DevOps",
+    subtitle: "Streamlining workflows",
     items: [
-      { name: "Git", icon: "Gi" },
-      { name: "GitHub", icon: "Gh" },
-      { name: "VS Code", icon: "Vs" },
-      { name: "Figma", icon: "Fi" },
-      { name: "Docker", icon: "Dk" },
-      { name: "Postman", icon: "Po" },
-      { name: "Android Studio", icon: "As" },
+      { name: "Git" },
+      { name: "GitHub" },
+      { name: "VS Code" },
+      { name: "Figma" },
+      { name: "Docker" },
+      { name: "Postman" },
+      { name: "Android Studio" },
     ],
   },
   {
-    title: "AI & ML",
-    accent: "rose",
-    glow: "from-rose-500/8 to-transparent",
+    title: "AI & Machine Learning",
+    subtitle: "Intelligence meets code",
     items: [
-      { name: "OpenAI API", icon: "AI" },
-      { name: "Gemini", icon: "Ge" },
-      { name: "Python", icon: "Py" },
-      { name: "ML Concepts", icon: "Ml" },
+      { name: "OpenAI API" },
+      { name: "Gemini" },
+      { name: "Python" },
+      { name: "ML Concepts" },
     ],
   },
 ];
 
-const accentStyles: Record<string, { badge: string; hover: string; text: string; dot: string }> = {
-  primary: {
-    badge: "bg-primary/[0.08] text-primary/80",
-    hover: "group-hover:bg-primary/[0.12] group-hover:text-primary",
-    text: "text-primary/70",
-    dot: "bg-primary/40",
-  },
-  emerald: {
-    badge: "bg-emerald-500/[0.08] text-emerald-400/80",
-    hover: "group-hover:bg-emerald-500/[0.12] group-hover:text-emerald-400",
-    text: "text-emerald-400/70",
-    dot: "bg-emerald-400/40",
-  },
-  blue: {
-    badge: "bg-blue-500/[0.08] text-blue-400/80",
-    hover: "group-hover:bg-blue-500/[0.12] group-hover:text-blue-400",
-    text: "text-blue-400/70",
-    dot: "bg-blue-400/40",
-  },
-  violet: {
-    badge: "bg-violet-500/[0.08] text-violet-400/80",
-    hover: "group-hover:bg-violet-500/[0.12] group-hover:text-violet-400",
-    text: "text-violet-400/70",
-    dot: "bg-violet-400/40",
-  },
-  orange: {
-    badge: "bg-orange-500/[0.08] text-orange-400/80",
-    hover: "group-hover:bg-orange-500/[0.12] group-hover:text-orange-400",
-    text: "text-orange-400/70",
-    dot: "bg-orange-400/40",
-  },
-  rose: {
-    badge: "bg-rose-500/[0.08] text-rose-400/80",
-    hover: "group-hover:bg-rose-500/[0.12] group-hover:text-rose-400",
-    text: "text-rose-400/70",
-    dot: "bg-rose-400/40",
-  },
+const categoryGradients: Record<string, string> = {
+  "Frontend": "from-primary/6 via-primary/3 to-transparent",
+  "Backend": "from-emerald-500/6 via-emerald-500/3 to-transparent",
+  "Mobile": "from-blue-500/6 via-blue-500/3 to-transparent",
+  "Database": "from-violet-500/6 via-violet-500/3 to-transparent",
+  "Tools & DevOps": "from-orange-500/6 via-orange-500/3 to-transparent",
+  "AI & Machine Learning": "from-rose-500/6 via-rose-500/3 to-transparent",
+};
+
+const dotColors: Record<string, string> = {
+  "Frontend": "bg-primary/40",
+  "Backend": "bg-emerald-400/40",
+  "Mobile": "bg-blue-400/40",
+  "Database": "bg-violet-400/40",
+  "Tools & DevOps": "bg-orange-400/40",
+  "AI & Machine Learning": "bg-rose-400/40",
 };
 
 const containerVariants = {
@@ -136,8 +107,8 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.06,
-      delayChildren: 0.1,
+      staggerChildren: 0.07,
+      delayChildren: 0.08,
     },
   },
 };
@@ -149,18 +120,6 @@ const cardVariants = {
     y: 0,
     transition: {
       duration: 0.5,
-      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-    },
-  },
-};
-
-const chipVariants = {
-  hidden: { opacity: 0, scale: 0.92 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.35,
       ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
     },
   },
@@ -191,46 +150,51 @@ function TechStack() {
           </p>
         </motion.div>
 
-        {/* Categories Grid — 3 columns on large, 2 on md, 1 on mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
+        {/* Categories — 2-column grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
           {techCategories.map((category) => {
-            const styles = accentStyles[category.accent];
+            const gradient = categoryGradients[category.title];
+            const dotColor = dotColors[category.title];
+
             return (
               <motion.div
                 key={category.title}
                 variants={cardVariants}
-                className="group relative rounded-2xl bg-white/[0.02] border border-white/[0.04] p-5 lg:p-6 backdrop-blur-md hover:border-white/[0.08] hover:bg-white/[0.03] transition-all duration-400 overflow-hidden"
+                className="group relative rounded-2xl bg-white/[0.02] border border-white/[0.04] p-6 lg:p-7 backdrop-blur-md hover:bg-white/[0.03] hover:border-white/[0.07] transition-all duration-400 overflow-hidden"
               >
-                {/* Hover glow */}
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl ${category.glow} rounded-full blur-3xl -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
+                {/* Background gradient accent — visible on hover */}
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`}
+                />
 
                 <div className="relative z-10">
-                  {/* Category title */}
-                  <div className="flex items-center gap-2.5 mb-4">
-                    <span className={`w-1.5 h-1.5 rounded-full ${styles.dot}`} />
-                    <h3 className={`text-[11px] font-bold uppercase tracking-[0.2em] ${styles.text}`}>
-                      {category.title}
-                    </h3>
+                  {/* Category header */}
+                  <div className="flex items-start justify-between mb-5">
+                    <div>
+                      <div className="flex items-center gap-2.5 mb-1">
+                        <span className={`w-1.5 h-1.5 rounded-full ${dotColor}`} />
+                        <h3 className="text-[13px] lg:text-sm font-bold text-white/90 tracking-tight">
+                          {category.title}
+                        </h3>
+                      </div>
+                      <p className="text-[10px] lg:text-[11px] text-white/20 tracking-wide ml-4">
+                        {category.subtitle}
+                      </p>
+                    </div>
+                    <span className="text-[9px] font-mono text-white/10 font-medium tabular-nums">
+                      {String(category.items.length).padStart(2, "0")}
+                    </span>
                   </div>
 
-                  {/* Tech chips */}
-                  <div className="flex flex-wrap gap-2">
+                  {/* Tech items */}
+                  <div className="flex flex-wrap gap-1.5">
                     {category.items.map((item) => (
-                      <motion.div
+                      <span
                         key={item.name}
-                        variants={chipVariants}
-                        whileHover={{ scale: 1.05, y: -1 }}
-                        className="group/chip"
+                        className="px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.04] text-[10px] lg:text-[11px] font-medium text-white/30 group-hover:bg-white/[0.04] group-hover:border-white/[0.06] group-hover:text-white/50 transition-all duration-300 cursor-default"
                       >
-                        <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.04] hover:border-white/[0.08] transition-all duration-300 cursor-default">
-                          <span className={`w-6 h-6 rounded-md ${styles.badge} ${styles.hover} flex items-center justify-center text-[9px] font-black transition-all duration-300`}>
-                            {item.icon}
-                          </span>
-                          <span className="text-[11px] font-medium text-white/40 group-hover/chip:text-white/70 transition-colors duration-300">
-                            {item.name}
-                          </span>
-                        </div>
-                      </motion.div>
+                        {item.name}
+                      </span>
                     ))}
                   </div>
                 </div>

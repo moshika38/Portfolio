@@ -196,25 +196,31 @@ function HomePage() {
                 SA Pamoth Moshika
               </h1>
 
-              {/* Typewriter subtitle */}
-              <div className="mt-4 lg:mt-5 h-7 flex items-center justify-center">
-                <p className="text-sm lg:text-base font-medium text-primary/90">
+              {/* Typewriter subtitle — placed directly below heading */}
+              <div className="mt-3 lg:mt-4 h-8 flex items-center justify-center">
+                <p className="text-sm lg:text-[15px] font-medium text-primary/90">
                   <TypewriterText />
                 </p>
               </div>
 
-              {/* Auto-scrolling Marquee */}
-              <div className="mt-6 lg:mt-8 w-full overflow-hidden rounded-2xl bg-white/[0.02] border border-white/[0.04] backdrop-blur-sm py-3">
-                <div className="flex animate-marquee whitespace-nowrap">
-                  {[...marqueeItems, ...marqueeItems].map((item, i) => (
-                    <span
-                      key={i}
-                      className="mx-3 lg:mx-4 text-[10px] lg:text-[11px] font-semibold uppercase tracking-widest text-white/25 whitespace-nowrap"
-                    >
-                      {item}
-                      <span className="ml-3 lg:ml-4 text-primary/20">•</span>
-                    </span>
-                  ))}
+              {/* Auto-scrolling Marquee — immediately below typewriter */}
+              <div className="relative mt-5 lg:mt-6 w-full">
+                {/* Gradient edge fade masks */}
+                <div className="absolute inset-y-0 left-0 w-8 z-10 bg-gradient-to-r from-card-dark to-transparent pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-8 z-10 bg-gradient-to-l from-card-dark to-transparent pointer-events-none" />
+
+                <div className="overflow-hidden rounded-xl bg-white/[0.03] border border-white/[0.04] backdrop-blur-md py-2.5">
+                  <div className="flex animate-marquee whitespace-nowrap">
+                    {[...marqueeItems, ...marqueeItems].map((item, i) => (
+                      <span
+                        key={i}
+                        className="mx-3 lg:mx-4 text-[10px] lg:text-[11px] font-semibold uppercase tracking-[0.15em] text-white/25 whitespace-nowrap"
+                      >
+                        <span className="text-primary/50 font-bold">/</span>
+                        <span className="ml-2">{item}</span>
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
 
