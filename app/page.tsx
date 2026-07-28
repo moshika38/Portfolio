@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main className="min-h-screen w-full relative selection:bg-primary/30">
       <Header />
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <HomePage />
       </div>
       <Footer />

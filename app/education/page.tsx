@@ -29,7 +29,7 @@ function Education() {
     <div className="education min-h-screen flex flex-col relative selection:bg-primary/30">
       <Header />
 
-      <main className="grow max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+      <main className="grow max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <motion.div
           initial="hidden"
           animate="visible"
