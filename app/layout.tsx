@@ -60,8 +60,25 @@ const satoshi = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Pamoth Moshika",
-  description: "portfolio website",
+  title: "Pamoth Moshika — Mobile & Web Developer",
+  description:
+    "Portfolio of Pamoth Moshika — Full-stack developer specializing in mobile and web applications with Flutter, React, Next.js, and modern tech stacks.",
+  keywords: [
+    "Pamoth Moshika",
+    "portfolio",
+    "developer",
+    "Flutter",
+    "React",
+    "Next.js",
+    "web developer",
+    "mobile developer",
+  ],
+  openGraph: {
+    title: "Pamoth Moshika — Mobile & Web Developer",
+    description:
+      "Full-stack developer specializing in mobile and web applications.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -72,8 +89,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${satoshi.className} ${satoshi.variable} antialiased bg-background text-foreground min-h-screen selection:bg-primary selection:text-primary-foreground`}
+        className={`${satoshi.className} ${satoshi.variable} antialiased bg-background text-foreground min-h-screen`}
       >
+        {/* Global noise overlay for premium texture */}
+        <div className="noise-overlay" aria-hidden="true" />
+
+        {/* Premium ambient background */}
+        <div className="premium-bg fixed inset-0 pointer-events-none" aria-hidden="true" />
+
         {children}
       </body>
     </html>

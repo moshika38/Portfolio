@@ -1,16 +1,63 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import InfoCard from "../../components/infoCard";
 import Headline from "@/components/headline";
-import SocialIcon from "@/components/socialIcon";
 import AppTags from "@/components/tags";
+import TechStack from "@/components/techStack";
 import Link from "next/link";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 
+const typewriterWords = [
+  "Mobile Developer",
+  "Full-Stack Developer",
+  "Web Developer",
+  "Flutter Developer",
+  "UI/UX Enthusiast",
+];
+
+function TypewriterText() {
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const currentWord = typewriterWords[currentWordIndex];
+
+  useEffect(() => {
+    const timeout = setTimeout(
+      () => {
+        if (!isDeleting) {
+          if (currentText.length < currentWord.length) {
+            setCurrentText(currentWord.slice(0, currentText.length + 1));
+          } else {
+            setTimeout(() => setIsDeleting(true), 2000);
+          }
+        } else {
+          if (currentText.length > 0) {
+            setCurrentText(currentText.slice(0, -1));
+          } else {
+            setIsDeleting(false);
+            setCurrentWordIndex((prev) => (prev + 1) % typewriterWords.length);
+          }
+        }
+      },
+      isDeleting ? 40 : 80,
+    );
+
+    return () => clearTimeout(timeout);
+  }, [currentText, isDeleting, currentWord, currentWordIndex]);
+
+  return (
+    <span>
+      {currentText}
+      <span className="typewriter-cursor" />
+    </span>
+  );
+}
+
 function HomePage() {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const contactInfo = [
     {
@@ -59,334 +106,346 @@ function HomePage() {
   ];
 
   const containerVariants: Variants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.6,
         ease: [0.16, 1, 0.3, 1],
-        staggerChildren: 0.1,
+        staggerChildren: 0.08,
       },
     },
   };
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
   };
 
   return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-      className="flex flex-col lg:flex-row bg-card-dark withBorder rounded-4xl lg:rounded-[2.5rem] overflow-hidden relative shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border-white/5"
-    >
-      {/* Static Ambient Glows */}
-      <div className="absolute -top-40 -right-40 w-[300px] lg:w-[500px] h-[300px] lg:h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0" />
-      <div className="absolute -bottom-40 -left-40 w-[300px] lg:w-[500px] h-[300px] lg:h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0" />
+    <div className="space-y-6 lg:space-y-8 pb-8">
+      {/* ============================================ */}
+      {/* HERO SECTION */}
+      {/* ============================================ */}
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        className="card-premium rounded-3xl lg:rounded-[2.5rem] overflow-hidden relative"
+      >
+        {/* Ambient Glows */}
+        <div className="glow-top-right" />
+        <div className="glow-bottom-left" />
 
-      {/* Left Column: Profile & Info */}
-      <div className="lg:w-[35%] p-8 sm:p-14 border-b lg:border-b-0 lg:border-r border-border-dark flex flex-col items-center bg-white/1 relative z-10">
-        {/* Mobile Only: Top-Right Contact Toggle */}
-        <motion.button
-          onClick={() => setIsOpen(!isOpen)}
-          className={`absolute lg:hidden top-6 right-6 flex items-center gap-2 px-3 lg:px-4 py-2 rounded-full border transition-all z-30 group shadow-lg ${
-            isOpen
-              ? "bg-primary/10 border-primary/30"
-              : "bg-white/5 border-white/10"
-          }`}
-        >
-          <span
-            className={`text-[9px] font-black uppercase tracking-widest transition-colors ${
-              isOpen ? "text-primary" : "text-white/50 group-hover:text-primary"
-            }`}
-          >
-            {isOpen ? "Close" : "Contact"}
-          </span>
-          <motion.div
-            animate={{ rotate: isOpen ? 180 : 0 }}
-            className="flex items-center justify-center translate-y-px"
-          >
-            <svg
-              width="10"
-              height="6"
-              viewBox="0 0 10 6"
-              fill="none"
-              className={`transition-colors ${isOpen ? "fill-primary" : "fill-white/30 group-hover:fill-primary"}`}
+        <div className="flex flex-col lg:flex-row relative z-10">
+          {/* Left Column: Profile & Info */}
+          <div className="lg:w-[35%] p-8 sm:p-12 lg:p-14 border-b lg:border-b-0 lg:border-r border-white/[0.03] flex flex-col items-center">
+            {/* Mobile Contact Toggle */}
+            <motion.button
+              onClick={() => setIsOpen(!isOpen)}
+              className={`absolute lg:hidden top-5 right-5 flex items-center gap-2 px-3 py-2 rounded-xl border transition-all z-30 group ${
+                isOpen
+                  ? "bg-primary/[0.08] border-primary/20"
+                  : "bg-white/[0.03] border-white/[0.04]"
+              }`}
             >
-              <path d="M5 6L0 0H10L5 6Z" fill="currentColor" />
-            </svg>
-          </motion.div>
-        </motion.button>
+              <span
+                className={`text-[9px] font-black uppercase tracking-widest transition-colors ${
+                  isOpen ? "text-primary" : "text-white/40 group-hover:text-primary"
+                }`}
+              >
+                {isOpen ? "Close" : "Contact"}
+              </span>
+              <motion.div
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                className="flex items-center justify-center"
+              >
+                <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+                  <path d="M5 6L0 0H10L5 6Z" fill="currentColor" className={`transition-colors ${isOpen ? "fill-primary" : "fill-white/25 group-hover:fill-primary"}`} />
+                </svg>
+              </motion.div>
+            </motion.button>
 
-        <motion.div
-          variants={itemVariants}
-          className="content flex flex-col items-center w-full"
-        >
-          <div className="relative w-32 h-32 lg:w-44 lg:h-44 rounded-full overflow-hidden mb-6 lg:mb-8 ring-4 ring-primary/10 transition-transform hover:scale-105 duration-500">
-            <Image
-              src="/assets/png/1pp.png"
-              alt="profile"
-              fill
-              className="object-cover object-top"
-            />
-          </div>
-
-          <h1 className="text-2xl lg:text-3xl font-black text-white text-center tracking-tight">
-            SA Pamoth Moshika
-          </h1>
-
-          <div className="flex justify-center items-center gap-2 lg:gap-3 mt-4 lg:mt-5">
-            <p className="inline-block text-[9px] lg:text-[10px] whitespace-nowrap font-black uppercase text-center bg-white/5 border border-white/10 px-3 lg:px-4 py-2 rounded-full tracking-widest text-primary">
-              Full-Stack Developer
-            </p>
-            <p className="inline-block text-[9px] lg:text-[10px] whitespace-nowrap font-black uppercase text-center bg-white/5 border border-white/10 px-3 lg:px-4 py-2 rounded-full tracking-widest text-text-muted">
-              AI Enthusiast
-            </p>
-          </div>
-
-          {/* Mobile: Collapsible Contact Section */}
-          <div className="lg:hidden w-full">
-            <AnimatePresence>
-              {isOpen && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="overflow-hidden w-full"
-                >
-                  <div className="contactinfo mt-8 w-full space-y-1">
-                    {contactInfo.map((item, idx) => (
-                      <motion.div
-                        key={idx}
-                        initial={{ x: -20, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ delay: idx * 0.1 }}
-                        className="w-full"
-                      >
-                        <InfoCard
-                          icon={item.icon}
-                          title={item.title}
-                          description={item.info}
-                        />
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  <motion.div
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                    className="mt-12 pt-8 border-t border-border-dark w-full"
-                  >
-                    <p className="text-white/30 text-[10px] font-black uppercase tracking-[0.3em] mb-6 text-center">
-                      Global presence
-                    </p>
-                    <div className="flex gap-3 justify-center">
-                      {socialLinks.map((social) => (
-                        <motion.a
-                          key={social.name}
-                          href={social.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          whileHover={{
-                            scale: 1.1,
-                            y: -5,
-                            backgroundColor: "var(--primary)",
-                          }}
-                          whileTap={{ scale: 0.95 }}
-                          className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center border border-white/5 transition-all group/icon"
-                        >
-                          <img
-                            src={`/assets/social/${social.icon}.svg`}
-                            alt={social.name}
-                            className="w-5 h-5 opacity-40 group-hover/icon:opacity-100 group-hover/icon:invert transition-all"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).src =
-                                "https://www.svgrepo.com/show/353844/github-icon.svg";
-                            }}
-                          />
-                        </motion.a>
-                      ))}
-                    </div>
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* PC: Static Contact Section (Restored) */}
-          <div className="hidden lg:block w-full">
-            <div className="w-24 h-px mt-10 mx-auto bg-linear-to-r from-transparent via-border-dark to-transparent"></div>
-
-            <div className="contactinfo mt-10 w-full space-y-2">
-              {contactInfo.map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  variants={itemVariants}
-                  whileHover={{ x: 5 }}
-                  className="w-full"
-                >
-                  <InfoCard
-                    icon={item.icon}
-                    title={item.title}
-                    description={item.info}
-                  />
-                </motion.div>
-              ))}
-            </div>
-
-            <motion.div
-              variants={itemVariants}
-              className="mt-20 pt-12 border-t border-border-dark w-full"
-            >
-              <p className="text-white/30 text-[10px] font-black uppercase tracking-[0.3em] mb-8 text-left">
-                Global presence
-              </p>
-              <div className="flex gap-4 justify-start">
-                {socialLinks.map((social) => (
-                  <motion.a
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{
-                      scale: 1.1,
-                      y: -5,
-                      backgroundColor: "var(--primary)",
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/5 transition-all group/icon"
-                  >
-                    <img
-                      src={`/assets/social/${social.icon}.svg`}
-                      alt={social.name}
-                      className="w-5 h-5 opacity-40 group-hover/icon:opacity-100 group-hover/icon:invert transition-all"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src =
-                          "https://www.svgrepo.com/show/353844/github-icon.svg";
-                      }}
-                    />
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Right Column: About & Services */}
-      <div className="lg:w-[65%] p-8 sm:p-14 lg:p-16 bg-linear-to-br from-black/20 to-transparent relative z-10">
-        <motion.div variants={itemVariants} className="mb-10 lg:mb-14">
-          <Headline title="Hey there!" />
-          <p className="text-lg lg:text-xl mt-6 lg:mt-8 font-light text-text-muted leading-relaxed">
-            I’m a passionate and detail-driven{" "}
-            <span className="text-primary font-medium">
-              Mobile & Web Developer
-            </span>{" "}
-            with experience in building modern, responsive, and user-friendly
-            applications. I’m skilled in both front-end and back-end
-            development, with strong problem-solving abilities, clean code
-            practices, and a solid understanding of UI/UX.
-          </p>
-        </motion.div>
-
-        <motion.div variants={itemVariants}>
-          <Headline title="My Services" />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 lg:mt-10">
-            {/* Web Dev Card */}
-            <motion.div
-              whileHover={{ y: -5 }}
-              className="p-6 lg:p-8 withBorder rounded-4xl bg-white/2 flex flex-col justify-between"
-            >
-              <div>
-                <div className="bg-primary/10 border border-primary/20 rounded-2xl inline-block p-3 lg:p-4 mb-5 lg:mb-6">
+            <motion.div variants={itemVariants} className="content flex flex-col items-center w-full">
+              {/* Premium Profile Image */}
+              <div className="relative mb-8 lg:mb-10 group">
+                {/* Outer glow ring */}
+                <div className="absolute -inset-3 bg-gradient-to-br from-primary/20 via-primary/5 to-transparent rounded-full opacity-50 group-hover:opacity-80 transition-opacity duration-700 blur-lg" />
+                {/* Image container */}
+                <div className="relative w-36 h-36 lg:w-44 lg:h-44 rounded-full overflow-hidden ring-2 ring-primary/15 group-hover:ring-primary/25 transition-all duration-500 animate-float">
                   <Image
-                    src="/assets/svg/website.svg"
-                    alt="web"
-                    width={28}
-                    height={28}
+                    src="/assets/png/1pp.png"
+                    alt="Pamoth Moshika"
+                    fill
+                    className="object-cover object-top"
                   />
+                  {/* Subtle gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
                 </div>
-                <h3 className="text-lg lg:text-xl font-bold text-white mb-2 lg:mb-3">
-                  Web Development
-                </h3>
-                <p className="text-xs lg:text-sm text-text-muted leading-relaxed">
-                  Building high-performance, scalable web applications using the
-                  latest tech stacks like Next.js, React, and Node.js.
+                {/* Status indicator */}
+                <div className="absolute bottom-1 right-1 lg:bottom-2 lg:right-2 w-5 h-5 bg-emerald-500 rounded-full border-[3px] border-card-dark z-10">
+                  <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-40" />
+                </div>
+              </div>
+
+              <h1 className="text-2xl lg:text-[28px] font-black text-white text-center tracking-tight leading-tight">
+                SA Pamoth Moshika
+              </h1>
+
+              {/* Typewriter subtitle */}
+              <div className="mt-4 lg:mt-5 h-7 flex items-center justify-center">
+                <p className="text-sm lg:text-base font-medium text-primary/90">
+                  <TypewriterText />
                 </p>
               </div>
-              <div className="flex flex-wrap gap-2 mt-6 lg:mt-8">
-                <AppTags tagname="TypeScript" />
-                <AppTags tagname="Next.js" />
-                <AppTags tagname="PostgreSQL" />
+
+              {/* Tags */}
+              <div className="flex justify-center items-center gap-2 mt-5 lg:mt-6">
+                <span className="inline-block text-[9px] lg:text-[10px] whitespace-nowrap font-black uppercase text-center bg-primary/[0.06] border border-primary/10 px-3 lg:px-4 py-2 rounded-full tracking-widest text-primary">
+                  Full-Stack Developer
+                </span>
+                <span className="inline-block text-[9px] lg:text-[10px] whitespace-nowrap font-black uppercase text-center bg-white/[0.03] border border-white/[0.04] px-3 lg:px-4 py-2 rounded-full tracking-widest text-white/30">
+                  AI Enthusiast
+                </span>
+              </div>
+
+              {/* Mobile Collapsible Contact */}
+              <div className="lg:hidden w-full">
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden w-full"
+                    >
+                      <div className="mt-8 w-full space-y-1">
+                        {contactInfo.map((item, idx) => (
+                          <motion.div
+                            key={idx}
+                            initial={{ x: -20, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{ delay: idx * 0.08 }}
+                            className="w-full"
+                          >
+                            <InfoCard icon={item.icon} title={item.title} description={item.info} />
+                          </motion.div>
+                        ))}
+                      </div>
+
+                      <motion.div
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                        className="mt-10 pt-8 border-t border-white/[0.03] w-full"
+                      >
+                        <p className="text-white/20 text-[10px] font-black uppercase tracking-[0.3em] mb-5 text-center">
+                          Connect
+                        </p>
+                        <div className="flex gap-3 justify-center">
+                          {socialLinks.map((social) => (
+                            <motion.a
+                              key={social.name}
+                              href={social.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              whileHover={{ scale: 1.1, y: -3 }}
+                              whileTap={{ scale: 0.95 }}
+                              className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.04] flex items-center justify-center transition-all hover:border-primary/15 hover:bg-primary/[0.06] group/icon"
+                            >
+                              <img
+                                src={`/assets/social/${social.icon}.svg`}
+                                alt={social.name}
+                                className="w-4 h-4 opacity-30 group-hover/icon:opacity-100 group-hover/icon:invert transition-all duration-300"
+                                onError={(e) => {
+                                  (e.target as HTMLImageElement).src =
+                                    "https://www.svgrepo.com/show/353844/github-icon.svg";
+                                }}
+                              />
+                            </motion.a>
+                          ))}
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Desktop Contact Section */}
+              <div className="hidden lg:block w-full">
+                <div className="w-20 h-px mt-10 mx-auto bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+
+                <div className="mt-10 w-full space-y-1">
+                  {contactInfo.map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      variants={itemVariants}
+                      whileHover={{ x: 4 }}
+                      className="w-full"
+                    >
+                      <InfoCard icon={item.icon} title={item.title} description={item.info} />
+                    </motion.div>
+                  ))}
+                </div>
+
+                <motion.div variants={itemVariants} className="mt-16 pt-10 border-t border-white/[0.03] w-full">
+                  <p className="text-white/20 text-[10px] font-black uppercase tracking-[0.3em] mb-6">
+                    Connect
+                  </p>
+                  <div className="flex gap-3 justify-start">
+                    {socialLinks.map((social) => (
+                      <motion.a
+                        key={social.name}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.1, y: -3 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="w-11 h-11 rounded-xl bg-white/[0.03] border border-white/[0.04] flex items-center justify-center transition-all hover:border-primary/15 hover:bg-primary/[0.06] group/icon"
+                      >
+                        <img
+                          src={`/assets/social/${social.icon}.svg`}
+                          alt={social.name}
+                          className="w-4 h-4 opacity-30 group-hover/icon:opacity-100 group-hover/icon:invert transition-all duration-300"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src =
+                              "https://www.svgrepo.com/show/353844/github-icon.svg";
+                          }}
+                        />
+                      </motion.a>
+                    ))}
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
-
-            <div className="flex flex-col gap-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <motion.div
-                  whileHover={{ y: -5 }}
-                  className="p-5 lg:p-6 withBorder rounded-4xl bg-white/2"
-                >
-                  <Image
-                    src="/assets/svg/mobile.svg"
-                    alt="mobile"
-                    width={20}
-                    height={20}
-                  />
-                  <h3 className="text-xs lg:text-sm font-bold text-white mt-3 lg:mt-4">
-                    App Development
-                  </h3>
-                  <p className="text-[10px] lg:text-[11px] text-text-muted mt-2">
-                    Android, iOS, Web & Desktop.
-                  </p>
-                </motion.div>
-                <motion.div
-                  whileHover={{ y: -5 }}
-                  className="p-5 lg:p-6 withBorder rounded-4xl bg-white/2"
-                >
-                  <Image
-                    src="/assets/svg/gd.svg"
-                    alt="design"
-                    width={20}
-                    height={20}
-                  />
-                  <h3 className="text-xs lg:text-sm font-bold text-white mt-3 lg:mt-4">
-                    Graphic Design
-                  </h3>
-                  <p className="text-[10px] lg:text-[11px] text-text-muted mt-2">
-                    Creative visuals with purpose.
-                  </p>
-                </motion.div>
-              </div>
-
-              <motion.div
-                whileHover={{ y: -5 }}
-                className="bg-primary p-8 lg:p-10 rounded-4xl lg:rounded-[2.5rem] flex flex-col justify-center items-start group cursor-pointer overflow-hidden relative"
-              >
-                <div className="relative z-10 w-full">
-                  <h3 className="text-xl lg:text-2xl font-black text-black leading-tight mb-6 lg:mb-8">
-                    Have a vision? <br /> Let's build it.
-                  </h3>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-3 bg-black text-white px-6 lg:px-8 py-3 rounded-full text-[10px] lg:text-xs font-black uppercase tracking-[0.2em] hover:scale-105 transition-transform duration-300 shadow-xl"
-                  >
-                    Start Project &rarr;
-                  </Link>
-                </div>
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
-              </motion.div>
-            </div>
           </div>
-        </motion.div>
-      </div>
-    </motion.div>
+
+          {/* Right Column: About & Services */}
+          <div className="lg:w-[65%] p-8 sm:p-12 lg:p-16 bg-gradient-to-br from-white/[0.008] to-transparent">
+            <motion.div variants={itemVariants} className="mb-12 lg:mb-16">
+              <Headline title="Hey there!" />
+              <p className="text-base lg:text-lg mt-6 lg:mt-8 font-light text-text-muted leading-[1.8]">
+                I&apos;m a passionate and detail-driven{" "}
+                <span className="text-primary font-medium">
+                  Mobile & Web Developer
+                </span>{" "}
+                with experience in building modern, responsive, and user-friendly
+                applications. I&apos;m skilled in both front-end and back-end
+                development, with strong problem-solving abilities, clean code
+                practices, and a solid understanding of UI/UX.
+              </p>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <Headline title="My Services" />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6 mt-8 lg:mt-10">
+                {/* Web Dev Card */}
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="p-6 lg:p-8 card-premium rounded-3xl flex flex-col justify-between group"
+                >
+                  <div>
+                    <div className="bg-primary/[0.06] border border-primary/10 rounded-2xl inline-flex p-3 lg:p-4 mb-5 lg:mb-6 group-hover:bg-primary/[0.1] transition-colors duration-300">
+                      <Image
+                        src="/assets/svg/website.svg"
+                        alt="web"
+                        width={28}
+                        height={28}
+                      />
+                    </div>
+                    <h3 className="text-lg lg:text-xl font-bold text-white mb-2 lg:mb-3">
+                      Web Development
+                    </h3>
+                    <p className="text-xs lg:text-sm text-text-muted leading-relaxed">
+                      Building high-performance, scalable web applications using the
+                      latest tech stacks like Next.js, React, and Node.js.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-6 lg:mt-8">
+                    <AppTags tagname="TypeScript" />
+                    <AppTags tagname="Next.js" />
+                    <AppTags tagname="PostgreSQL" />
+                  </div>
+                </motion.div>
+
+                <div className="flex flex-col gap-5 lg:gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6">
+                    <motion.div
+                      whileHover={{ y: -4 }}
+                      className="p-5 lg:p-6 card-premium rounded-3xl group"
+                    >
+                      <Image
+                        src="/assets/svg/mobile.svg"
+                        alt="mobile"
+                        width={20}
+                        height={20}
+                      />
+                      <h3 className="text-xs lg:text-sm font-bold text-white mt-3 lg:mt-4">
+                        App Development
+                      </h3>
+                      <p className="text-[10px] lg:text-[11px] text-text-muted mt-2 leading-relaxed">
+                        Android, iOS, Web & Desktop.
+                      </p>
+                    </motion.div>
+                    <motion.div
+                      whileHover={{ y: -4 }}
+                      className="p-5 lg:p-6 card-premium rounded-3xl group"
+                    >
+                      <Image
+                        src="/assets/svg/gd.svg"
+                        alt="design"
+                        width={20}
+                        height={20}
+                      />
+                      <h3 className="text-xs lg:text-sm font-bold text-white mt-3 lg:mt-4">
+                        Graphic Design
+                      </h3>
+                      <p className="text-[10px] lg:text-[11px] text-text-muted mt-2 leading-relaxed">
+                        Creative visuals with purpose.
+                      </p>
+                    </motion.div>
+                  </div>
+
+                  {/* CTA Card */}
+                  <motion.div
+                    whileHover={{ y: -4 }}
+                    className="bg-primary p-8 lg:p-10 rounded-3xl lg:rounded-[2rem] flex flex-col justify-center items-start group cursor-pointer overflow-hidden relative"
+                  >
+                    <div className="relative z-10 w-full">
+                      <h3 className="text-xl lg:text-2xl font-black text-black leading-tight mb-6 lg:mb-8">
+                        Have a vision? <br /> Let&apos;s build it.
+                      </h3>
+                      <Link
+                        href="/contact"
+                        className="inline-flex items-center gap-3 bg-black text-white px-6 lg:px-8 py-3 rounded-full text-[10px] lg:text-xs font-black uppercase tracking-[0.2em] hover:scale-105 transition-transform duration-300 shadow-xl"
+                      >
+                        Start Project &rarr;
+                      </Link>
+                    </div>
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* ============================================ */}
+      {/* TECH STACK SECTION */}
+      {/* ============================================ */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        className="card-premium rounded-3xl lg:rounded-[2.5rem] overflow-hidden relative p-8 sm:p-12 lg:p-14"
+      >
+        <div className="glow-top-right" />
+        <TechStack />
+      </motion.div>
+    </div>
   );
 }
 
