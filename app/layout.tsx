@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
+import PageLoader from "@/components/pageLoader";
 
 const satoshi = localFont({
   src: [
@@ -74,7 +75,10 @@ export default function RootLayout({
       <body
         className={`${satoshi.className} ${satoshi.variable} antialiased bg-background text-foreground min-h-screen selection:bg-primary selection:text-primary-foreground`}
       >
-        {children}
+        <PageLoader />
+        <div className="page-content">
+          {children}
+        </div>
       </body>
     </html>
   );

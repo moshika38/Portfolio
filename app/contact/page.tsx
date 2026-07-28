@@ -90,7 +90,7 @@ function Contact() {
   };
 
   return (
-    <div className="contact min-h-screen flex flex-col bg-background selection:bg-primary/30">
+    <div className="contact min-h-screen flex flex-col selection:bg-primary/30">
       <Header />
 
       <main className="grow max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -101,7 +101,8 @@ function Contact() {
           initial="hidden"
           animate="visible"
           variants={containerVariants}
-          className="group bg-card-dark withBorder rounded-[2.5rem] overflow-hidden relative shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border-white/5"
+          className="group withBorder rounded-[2.5rem] overflow-hidden relative shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border-white/5"
+          style={{ backgroundColor: 'rgba(30, 30, 31, 0.85)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}
         >
           {/* Static Ambient Glows */}
           <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0" />

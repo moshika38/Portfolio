@@ -81,7 +81,8 @@ function HomePage() {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="flex flex-col lg:flex-row bg-card-dark withBorder rounded-4xl lg:rounded-[2.5rem] overflow-hidden relative shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border-white/5"
+      className="flex flex-col lg:flex-row withBorder rounded-4xl lg:rounded-[2.5rem] overflow-hidden relative shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border-white/5"
+      style={{ backgroundColor: 'rgba(30, 30, 31, 0.85)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}
     >
       {/* Static Ambient Glows */}
       <div className="absolute -top-40 -right-40 w-[300px] lg:w-[500px] h-[300px] lg:h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0" />
