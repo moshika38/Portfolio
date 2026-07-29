@@ -10,7 +10,6 @@ import { motion, Variants } from "framer-motion";
 import ProjectModal from "@/components/ProjectModal";
 
 interface Project {
-  id: number;
   title: string;
   image: string;
   description: string;
@@ -20,11 +19,8 @@ interface Project {
 }
 
 function Projects() {
-  const [projectType, setProjectType] = useState("all");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const project = projects;
 
   const handleOpenModal = (proj: Project) => {
     setSelectedProject(proj);
@@ -74,52 +70,28 @@ function Projects() {
                   platforms.
                 </p>
               </div>
-
-              <div className="flex bg-white/[0.03] p-1.5 rounded-xl border border-white/[0.04] backdrop-blur-sm w-full lg:w-auto overflow-x-auto">
-                <div className="flex w-full lg:w-auto min-w-max">
-                  {["all", "mobile", "web"].map((type) => (
-                    <button
-                      key={type}
-                      onClick={() => setProjectType(type)}
-                      className={`flex-1 lg:flex-none px-5 lg:px-6 py-2.5 rounded-lg text-[10px] lg:text-[11px] font-black uppercase tracking-widest transition-all duration-300 ${
-                        projectType === type
-                          ? "bg-primary text-black shadow-lg shadow-primary/15"
-                          : "text-white/30 hover:text-white/60 hover:bg-white/[0.03]"
-                      }`}
-                    >
-                      {type === "all"
-                        ? "All"
-                        : type === "mobile"
-                          ? "Mobile"
-                          : "Web"}
-                    </button>
-                  ))}
-                </div>
-              </div>
             </motion.div>
 
             <motion.div
               variants={itemVariants}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6"
             >
-              {(projectType === "all"
-                ? project
-                : project.filter((item) => item.type === projectType)
-              ).map((item) => (
-                <motion.div
-                  key={item.id}
-                  whileHover={{ y: -8 }}
-                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <ProjectCard
-                    image={item.image}
-                    title={item.title}
-                    description={item.description}
-                    tags={item.tags}
-                    link={item.link}
-                    onView={() => handleOpenModal(item)}
-                  />
-                </motion.div>
+              {projects.map((item: Project, index: number) => (
+                <div key={index}>
+                  <motion.div
+                    whileHover={{ y: -8 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <ProjectCard
+                      image={item.image}
+                      title={item.title}
+                      description={item.description}
+                      tags={item.tags}
+                      link={item.link}
+                      onView={() => handleOpenModal(item)}
+                    />
+                  </motion.div>
+                </div>
               ))}
             </motion.div>
           </div>
