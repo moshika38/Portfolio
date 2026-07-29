@@ -44,7 +44,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="bg-card-dark border border-white/[0.05] w-full max-w-5xl max-h-[90vh] rounded-3xl lg:rounded-[2rem] overflow-hidden relative shadow-2xl shadow-primary/[0.03] flex flex-col"
+            className="bg-card-dark border border-white/[0.05] w-full max-w-5xl max-h-[90vh] rounded-3xl lg:rounded-[2rem] overflow-y-auto relative shadow-2xl shadow-primary/[0.03] flex flex-col"
           >
             {/* Close Button */}
             <button
@@ -60,7 +60,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
               initial={{ opacity: 0, scale: 1.05 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full aspect-video overflow-hidden shrink-0"
+              className="relative w-full aspect-video overflow-hidden"
             >
               <Image
                 src={project.image}
@@ -73,7 +73,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
             </motion.div>
 
             {/* Project Details */}
-            <div className="overflow-y-auto p-6 sm:p-8 md:p-10">
+            <div className="p-6 sm:p-8 md:p-10">
               <div className="max-w-3xl">
                 <div className="mb-6">
                   <span className="inline-block px-3 py-1 rounded-full bg-primary/[0.08] text-primary text-[10px] font-black uppercase tracking-widest mb-4 border border-primary/10">
