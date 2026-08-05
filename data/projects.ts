@@ -1,4 +1,32 @@
 export const projects = [
+ 
+  {
+    title: "NodeX-CLI",
+    image: "/assets/projects/nodex.jpg",
+    description:
+      "A CLI tool to generate back end projects with preferred language, database, and stack configuration.",
+    link: "https://github.com/moshika38/NodeX-CLI",
+    tags: "#express #node #sqlite #⁠postgreSql #mongoDB #CLI #tool",
+    type: "cli",
+  },
+  {
+    title: "React & Next.js Cheat-sheet",
+    image: "/assets/projects/1sheet.jpg",
+    description:
+      "Streamline front-end workflow with this comprehensive Next.js & React Cheat-sheet. Designed as a quick reference guide for modern web development.",
+    link: "https://github.com/moshika38/Nextjs-React-Cheatsheet",
+    tags: "#react #next.js #typescript #javascript #webdev #cheatsheet",
+    type: "web",
+  },
+  {
+    title: "B-Vibe Cafe (POS)",
+    image: "/assets/projects/bvibe.jpg",
+    description:
+      "A fully offline point-of-sale (POS) and billing system built with Flutter for B Vibe Cafe.",
+    link: "https://github.com/moshika38/B-Vibe-Cafe",
+    tags: "#pos #sqlitedb #flutter #desktop #inventory #billing",
+    type: "web",
+  },
   {
     title: "Subhash Engineering",
     image: "/assets/projects/sb.jpg",
@@ -20,14 +48,15 @@ export const projects = [
   },
 
   {
-    title: "B-Vibe Cafe (POS)",
-    image: "/assets/projects/bvibe.jpg",
+    title: "Ai Chat App With Flutter",
+    image: "/assets/projects/chatapp.png",
     description:
-      "A fully offline point-of-sale (POS) and billing system built with Flutter for B Vibe Cafe.",
-    link: "https://github.com/moshika38/B-Vibe-Cafe",
-    tags: "#pos #sqlitedb #flutter #desktop #inventory #billing",
-    type: "web",
+      "An advanced AI-powered chat application built with Flutter. This app enables users to interact with AI for personalized conversations, providing an engaging and intelligent chat experience.",
+    link: "https://github.com/moshika38/Ai-Chat-App-with-Flutter",
+    tags: "#android #ios #Authentication #Ai #Chat #Gemini",
+    type: "mobile",
   },
+
   {
     title: "GourmetHaven",
     image: "/assets/projects/gh.png",
@@ -63,16 +92,6 @@ export const projects = [
       "A Flutter-based task management app that helps users organize and schedule tasks with an intuitive interface. It includes attractive animated activities and provides scheduled notifications.",
     link: "https://github.com/moshika38/Work-Manager-App",
     tags: "#android #ios #Scheduling #CloudFirestone #AlertNotifications",
-    type: "mobile",
-  },
-
-  {
-    title: "Ai Chat App With Flutter",
-    image: "/assets/projects/chatapp.png",
-    description:
-      "An advanced AI-powered chat application built with Flutter. This app enables users to interact with AI for personalized conversations, providing an engaging and intelligent chat experience.",
-    link: "https://github.com/moshika38/Ai-Chat-App-with-Flutter",
-    tags: "#android #ios #Authentication #Ai #Chat #Gemini",
     type: "mobile",
   },
 

@@ -178,8 +178,14 @@ function Education() {
                     image="/assets/svg/certificate.svg"
                   />
                   <EduCard
-                    title="Web Design Online Course"
+                    title="Web Design for Beginners"
                     description="University of Moratuwa"
+                    summery=""
+                    image="/assets/svg/certificate.svg"
+                  />
+                  <EduCard
+                    title="Flutter Course"
+                    description="DP Education IT Campus"
                     summery=""
                     image="/assets/svg/certificate.svg"
                   />
