@@ -365,23 +365,23 @@ function HomePage() {
             <motion.div variants={itemVariants}>
               <Headline title="My Services" />
 
-              {/* 2-column grid: AI featured card (left) + existing cards (right) */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6 mt-8 lg:mt-10">
-                {/* Left Column: AI Solutions — large featured card */}
+              {/* 2-column grid: AI card (left) | App Dev + Graphic Design + CTA (right) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 lg:mt-8">
+
+                {/* Left: AI Solutions */}
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="relative p-6 lg:p-8 rounded-3xl flex flex-col justify-between group overflow-hidden bg-gradient-to-br from-rose-500/[0.05] via-rose-500/[0.02] to-transparent border border-rose-500/15 hover:border-rose-500/25 transition-all duration-400"
+                  className="relative p-5 lg:p-6 rounded-3xl flex flex-col justify-between group overflow-hidden bg-gradient-to-br from-rose-500/[0.05] via-rose-500/[0.02] to-transparent border border-rose-500/15 hover:border-rose-500/25 transition-all duration-400"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-rose-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-rose-500/10 rounded-full blur-3xl group-hover:bg-rose-500/15 transition-colors duration-700" />
-                  <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-rose-500/5 rounded-full blur-3xl" />
+                  <div className="absolute -top-16 -right-16 w-36 h-36 bg-rose-500/10 rounded-full blur-3xl group-hover:bg-rose-500/15 transition-colors duration-700" />
 
                   <div className="relative z-10">
-                    <div className="w-11 h-11 rounded-2xl bg-rose-500/15 border border-rose-500/20 flex items-center justify-center mb-5 lg:mb-6 group-hover:bg-rose-500/20 group-hover:scale-105 transition-all duration-300">
+                    <div className="w-10 h-10 rounded-2xl bg-rose-500/15 border border-rose-500/20 flex items-center justify-center mb-4 group-hover:bg-rose-500/20 group-hover:scale-105 transition-all duration-300">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="22"
-                        height="22"
+                        width="18"
+                        height="18"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -395,103 +395,110 @@ function HomePage() {
                         <path d="M21 5h-4" />
                       </svg>
                     </div>
-                    <h3 className="text-lg lg:text-xl font-bold text-white mb-2 lg:mb-3">
-                      AI Solutions & Automation
+                    <h3 className="text-base lg:text-lg font-bold text-white mb-2">
+                      AI Solutions &amp; Automation
                     </h3>
-                    <p className="text-xs lg:text-sm text-text-muted leading-relaxed max-w-md">
+                    <p className="text-xs text-text-muted leading-relaxed">
                       Build intelligent AI-powered applications, AI chatbots, workflow automation, AI agents, and LLM integrations using modern AI technologies and APIs.
                     </p>
                   </div>
-                  <div className="flex flex-wrap gap-2 mt-6 lg:mt-8 relative z-10">
+                  <div className="flex flex-wrap gap-2 mt-5 relative z-10">
                     <AppTags tagname="OpenAI" />
                     <AppTags tagname="Gemini" />
                     <AppTags tagname="Python" />
                   </div>
                 </motion.div>
 
-                {/* Right Column: App Dev + Graphic Design + CTA */}
-                <div className="flex flex-col gap-5 lg:gap-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6">
+                {/* Right: App Dev + Graphic Design + CTA stacked */}
+                <div className="flex flex-col gap-4">
+                  {/* Row 1: App Dev + Graphic Design side by side */}
+                  <div className="grid grid-cols-2 gap-4">
                     <motion.div
                       whileHover={{ y: -4 }}
-                      className="p-5 lg:p-6 card-premium rounded-3xl group"
+                      className="p-4 lg:p-5 card-premium rounded-3xl group"
                     >
                       <Image
                         src="/assets/svg/mobile.svg"
                         alt="mobile"
-                        width={20}
-                        height={20}
+                        width={18}
+                        height={18}
                       />
-                      <h3 className="text-xs lg:text-sm font-bold text-white mt-3 lg:mt-4">
+                      <h3 className="text-xs lg:text-sm font-bold text-white mt-3">
                         App Development
                       </h3>
-                      <p className="text-[10px] lg:text-[11px] text-text-muted mt-2 leading-relaxed">
-                        Android, iOS, Web & Desktop.
+                      <p className="text-[10px] text-text-muted mt-1.5 leading-relaxed">
+                        Android, iOS, Web &amp; Desktop.
                       </p>
                     </motion.div>
                     <motion.div
                       whileHover={{ y: -4 }}
-                      className="p-5 lg:p-6 card-premium rounded-3xl group"
+                      className="p-4 lg:p-5 card-premium rounded-3xl group"
                     >
                       <Image
                         src="/assets/svg/gd.svg"
                         alt="design"
-                        width={20}
-                        height={20}
+                        width={18}
+                        height={18}
                       />
-                      <h3 className="text-xs lg:text-sm font-bold text-white mt-3 lg:mt-4">
+                      <h3 className="text-xs lg:text-sm font-bold text-white mt-3">
                         Graphic Design
                       </h3>
-                      <p className="text-[10px] lg:text-[11px] text-text-muted mt-2 leading-relaxed">
+                      <p className="text-[10px] text-text-muted mt-1.5 leading-relaxed">
                         Creative visuals with purpose.
                       </p>
                     </motion.div>
                   </div>
 
-                  {/* CTA Card */}
+                  {/* Row 2: CTA */}
                   <motion.div
                     whileHover={{ y: -4 }}
-                    className="bg-primary p-8 lg:p-10 rounded-3xl lg:rounded-[2rem] flex flex-col justify-center items-start group cursor-pointer overflow-hidden relative"
+                    className="bg-primary p-6 lg:p-8 rounded-3xl flex flex-col justify-center items-start group cursor-pointer overflow-hidden relative flex-1"
                   >
                     <div className="relative z-10 w-full">
-                      <h3 className="text-xl lg:text-2xl font-black text-black leading-tight mb-6 lg:mb-8">
+                      <h3 className="text-xl lg:text-2xl font-black text-black leading-tight mb-4 lg:mb-5">
                         Have a vision? <br /> Let&apos;s build it.
                       </h3>
                       <Link
                         href="/contact"
-                        className="inline-flex items-center gap-3 bg-black text-white px-6 lg:px-8 py-3 rounded-full text-[10px] lg:text-xs font-black uppercase tracking-[0.2em] hover:scale-105 transition-transform duration-300 shadow-xl"
+                        className="inline-flex items-center gap-2 bg-black text-white px-5 lg:px-7 py-2.5 rounded-full text-[10px] lg:text-xs font-black uppercase tracking-[0.2em] hover:scale-105 transition-transform duration-300 shadow-xl"
                       >
                         Start Project &rarr;
                       </Link>
                     </div>
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
+                    <div className="absolute top-0 right-0 w-28 h-28 bg-white/10 rounded-full blur-3xl -mr-14 -mt-14 group-hover:scale-150 transition-transform duration-700" />
                   </motion.div>
                 </div>
               </div>
 
-              {/* Full-width Web Development card below the grid */}
+              {/* Full-width Web Development card */}
               <motion.div
                 whileHover={{ y: -4 }}
-                className="p-6 lg:p-8 card-premium rounded-3xl flex flex-col justify-between group mt-5 lg:mt-6"
+                className="mt-4 p-5 lg:p-6 card-premium rounded-3xl group"
               >
-                <div>
-                  <div className="bg-primary/[0.06] border border-primary/10 rounded-2xl inline-flex p-3 lg:p-4 mb-5 lg:mb-6 group-hover:bg-primary/[0.1] transition-colors duration-300">
-                    <Image
-                      src="/assets/svg/website.svg"
-                      alt="web"
-                      width={28}
-                      height={28}
-                    />
-                  </div>
-                  <h3 className="text-lg lg:text-xl font-bold text-white mb-2 lg:mb-3">
-                    Web Development
-                  </h3>
-                  <p className="text-xs lg:text-sm text-text-muted leading-relaxed">
-                    Building high-performance, scalable web applications using the
-                    latest tech stacks like Next.js, React, and Node.js.
-                  </p>
+                <div className="w-11 h-11 rounded-2xl bg-primary/90 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-black"
+                  >
+                    <polyline points="16 18 22 12 16 6" />
+                    <polyline points="8 6 2 12 8 18" />
+                  </svg>
                 </div>
-                <div className="flex flex-wrap gap-2 mt-6 lg:mt-8">
+                <h3 className="text-base lg:text-lg font-bold text-white mb-2">
+                  Web Development
+                </h3>
+                <p className="text-xs lg:text-sm text-text-muted leading-relaxed max-w-2xl">
+                  Building high-performance, scalable web applications using the latest tech stacks like Next.js, React, and Node.js.
+                </p>
+                <div className="flex flex-wrap gap-2 mt-4">
                   <AppTags tagname="TypeScript" />
                   <AppTags tagname="Next.js" />
                   <AppTags tagname="PostgreSQL" />
