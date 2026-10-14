@@ -127,7 +127,7 @@ function HomePage() {
   };
 
   return (
-    <div className="space-y-6 lg:space-y-8 pb-8">
+    <div className="pb-8">
       {/* ============================================ */}
       {/* HERO SECTION */}
       {/* ============================================ */}
@@ -507,19 +507,13 @@ function HomePage() {
             </motion.div>
           </div>
         </div>
-      </motion.div>
 
-      {/* ============================================ */}
-      {/* TECH STACK SECTION */}
-      {/* ============================================ */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        className="card-premium rounded-3xl lg:rounded-[2.5rem] overflow-hidden relative p-8 sm:p-12 lg:p-14"
-      >
-        <div className="glow-top-right" />
-        <TechStack />
+        {/* ============================================ */}
+        {/* TECH STACK SECTION */}
+        {/* ============================================ */}
+        <div className="border-t border-white/[0.03] p-8 sm:p-12 lg:p-16 relative z-10">
+          <TechStack />
+        </div>
       </motion.div>
     </div>
   );

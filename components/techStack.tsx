@@ -127,7 +127,7 @@ const cardVariants = {
 
 function TechStack() {
   return (
-    <section className="section-spacing" aria-label="Technology Stack">
+    <section aria-label="Technology Stack">
       <motion.div
         initial="hidden"
         whileInView="visible"
